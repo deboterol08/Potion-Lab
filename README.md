@@ -1,4 +1,4 @@
-# Potion Lab — Iteración 1
+# Potion Lab — V.1.0.
 
 Primera versión académica del proyecto semestral. Cubre un flujo pequeño pero
 completo: iniciar sesión, consultar un gremio, abrir una fórmula y votar una vez
