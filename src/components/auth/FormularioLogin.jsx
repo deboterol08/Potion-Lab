@@ -1,8 +1,5 @@
-import { useState } from 'react'
-import {
-  CREDENCIALES_DEMO,
-  USUARIO_DEMO,
-} from '../../data/datosDemo'
+import { useState } from "react";
+import { CREDENCIALES_DEMO, USUARIO_DEMO } from "../../data/datosDemo";
 
 function FormularioLogin({ onLogin }) {
   // Estos inputs son "controlados": React guarda su valor y se lo devuelve
@@ -10,44 +7,45 @@ function FormularioLogin({ onLogin }) {
   const [formulario, setFormulario] = useState({
     email: CREDENCIALES_DEMO.email,
     password: CREDENCIALES_DEMO.password,
-  })
-  const [error, setError] = useState('')
+  });
+
+  // Por ahora no hay ningun mensaje de error. Luego en el return, si error tiene contenido, muestra el parrafo. Esto se hace pq queremos mostrar el mensaje solamente cuando el login falla.
+
+  const [error, setError] = useState("");
 
   function manejarCambio(evento) {
-    const { name, value } = evento.target
+    const { name, value } = evento.target;
 
     setFormulario((datosAnteriores) => ({
       ...datosAnteriores,
       [name]: value,
-    }))
+    }));
   }
 
   function manejarEnvio(evento) {
     // Un formulario recarga la página por defecto. preventDefault permite que
     // React procese el envío sin perder el estado actual de la aplicación.
-    evento.preventDefault()
+    evento.preventDefault();
 
     const emailCorrecto =
-      formulario.email.trim().toLowerCase() === CREDENCIALES_DEMO.email
-    const passwordCorrecto = formulario.password === CREDENCIALES_DEMO.password
+      formulario.email.trim().toLowerCase() === CREDENCIALES_DEMO.email;
+    const passwordCorrecto = formulario.password === CREDENCIALES_DEMO.password;
 
     if (!emailCorrecto || !passwordCorrecto) {
-      setError('El correo o la contraseña demo no coinciden.')
-      return
+      setError("El correo o la contraseña demo no coinciden.");
+      return;
     }
 
-    setError('')
+    setError("");
     // El hijo no modifica App directamente: le comunica el usuario mediante
     // la función onLogin que recibió como prop.
-    onLogin(USUARIO_DEMO)
+    onLogin(USUARIO_DEMO);
   }
 
   return (
     <main className="login-page">
-      <section className="login-intro" aria-labelledby="login-title">
-        <div className="brand-mark brand-mark--large" aria-hidden="true">
-          PL
-        </div>
+      <section className="login-intro">
+        <div className="brand-mark brand-mark--large">PL</div>
         <p className="eyebrow">Laboratorio colaborativo</p>
         <h1 id="login-title">Potion Lab</h1>
         <p className="login-description">
@@ -55,14 +53,14 @@ function FormularioLogin({ onLogin }) {
           definitiva.
         </p>
 
-        <div className="feature-list" aria-label="Funciones de esta versión">
+        <div className="feature-list">
           <span>01 · Accede a tu perfil</span>
           <span>02 · Consulta tu gremio</span>
           <span>03 · Vota la fórmula activa</span>
         </div>
       </section>
 
-      <section className="login-panel" aria-label="Inicio de sesión">
+      <section className="login-panel">
         <div className="login-card">
           <div>
             <p className="eyebrow">Acceso de aprendiz</p>
@@ -113,7 +111,7 @@ function FormularioLogin({ onLogin }) {
         </div>
       </section>
     </main>
-  )
+  );
 }
 
-export default FormularioLogin
+export default FormularioLogin;

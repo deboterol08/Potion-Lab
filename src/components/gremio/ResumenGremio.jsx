@@ -1,6 +1,6 @@
 function ResumenGremio({ gremio }) {
   return (
-    <aside className="card guild-card" aria-labelledby="guild-title">
+    <aside className="card guild-card">
       <div className="card-heading">
         <div>
           <p className="eyebrow">Tu gremio</p>
@@ -32,9 +32,7 @@ function ResumenGremio({ gremio }) {
           {gremio.miembros.map((miembro) => (
             // key ayuda a React a reconocer a cada miembro entre renderizados.
             <li key={miembro.id}>
-              <span className="member-initial" aria-hidden="true">
-                {miembro.nombre.charAt(0)}
-              </span>
+              <span className="member-initial">{miembro.nombre.charAt(0)}</span>
               <span>
                 <strong>{miembro.nombre}</strong>
                 <small>{miembro.especialidad}</small>
@@ -45,7 +43,7 @@ function ResumenGremio({ gremio }) {
         </ul>
       </div>
     </aside>
-  )
+  );
 }
 
-export default ResumenGremio
+export default ResumenGremio;

@@ -1,19 +1,16 @@
-import CategoriaVotacion from './CategoriaVotacion'
+import CategoriaVotacion from "./CategoriaVotacion";
 
 function TarjetaFormula({ formula, votosUsuario, onVote }) {
-  const votosCompletados = Object.values(votosUsuario).filter(Boolean).length
+  const votosCompletados = Object.values(votosUsuario).filter(Boolean).length;
 
   return (
-    <section className="card formula-card" aria-labelledby="formula-title">
+    <section className="card formula-card">
       <div className="card-heading formula-heading">
         <div>
           <p className="eyebrow">Fórmula activa</p>
           <h2 id="formula-title">{formula.nombrePocion}</h2>
         </div>
-        <span className="status-badge">
-          <span aria-hidden="true" />
-          {formula.estadoEtiqueta}
-        </span>
+        <span className="status-badge">{formula.estadoEtiqueta}</span>
       </div>
 
       <p className="formula-effect">{formula.efectoDeseado}</p>
@@ -59,7 +56,7 @@ function TarjetaFormula({ formula, votosUsuario, onVote }) {
         Puedes cambiar cada elección mientras la fórmula permanezca en votación.
       </p>
     </section>
-  )
+  );
 }
 
-export default TarjetaFormula
+export default TarjetaFormula;
