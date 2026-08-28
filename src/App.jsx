@@ -310,7 +310,7 @@ function App() {
     setVotos((anteriores) => ({
       ...anteriores,
       [formulaId]: {
-        ...(anteriores[formulaId] ?? {}),
+        ...anteriores[formulaId],
         [categoriaId]: opcionId,
       },
     }));
