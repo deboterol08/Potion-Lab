@@ -12,8 +12,8 @@ const Ambiente = styled.div`
   overflow: hidden;
   pointer-events: none;
   background:
-    radial-gradient(circle at 15% 10%, rgba(100, 70, 190, 0.18), transparent 30%),
-    radial-gradient(circle at 88% 18%, rgba(45, 190, 205, 0.1), transparent 25%),
+    radial-gradient(circle at 13% 8%, rgba(100, 70, 190, 0.2), transparent 29%),
+    radial-gradient(circle at 88% 17%, rgba(45, 190, 205, 0.11), transparent 24%),
     linear-gradient(160deg, #080a16 0%, #0c1023 48%, #080a16 100%);
 
   &::before,
@@ -42,8 +42,23 @@ const Ambiente = styled.div`
   }
 `;
 
+const Trama = styled.div`
+  position: absolute;
+  inset: 0;
+  opacity: 0.2;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 52px 52px;
+  mask-image: linear-gradient(to bottom, black, transparent 78%);
+`;
+
 function FondoAlquimico() {
-  return <Ambiente aria-hidden="true" />;
+  return (
+    <Ambiente aria-hidden="true">
+      <Trama />
+    </Ambiente>
+  );
 }
 
 export default FondoAlquimico;
