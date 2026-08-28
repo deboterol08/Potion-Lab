@@ -12,10 +12,13 @@
   --muted: #a9a9bd;
   --panel: rgba(18, 21, 44, 0.86);
   --panel-soft: rgba(25, 29, 57, 0.66);
+  --panel-solid: #11152b;
   --line: rgba(255, 255, 255, 0.1);
+  --line-soft: rgba(255, 255, 255, 0.065);
   --violet: #9b87f5;
   --cyan: #55d9e8;
   --gold: #f4c96b;
+  --shadow-panel: 0 24px 70px rgba(0, 0, 0, 0.24);
 }
 
 * {
@@ -34,6 +37,7 @@ body {
   min-height: 100vh;
   margin: 0;
   overflow-x: hidden;
+  background: #080a16;
 }
 
 button,
@@ -97,9 +101,28 @@ svg {
 
 .glass-panel {
   border: 1px solid var(--line);
-  background: linear-gradient(145deg, rgba(25, 29, 57, 0.88), rgba(12, 15, 34, 0.82));
-  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.22);
+  background: linear-gradient(145deg, rgba(24, 28, 55, 0.9), rgba(12, 15, 33, 0.84));
+  box-shadow: var(--shadow-panel);
   backdrop-filter: blur(18px);
+}
+
+/* Superficie secundaria para bloques que no deben competir con el contenido. */
+.surface-soft {
+  border: 1px solid var(--line-soft);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+/* Microinteracción compartida: se usa solo en tarjetas que sean enlaces. */
+.interactive-card {
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease;
+}
+
+.interactive-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(155, 135, 245, 0.24);
 }
 
 .focus-ring:focus-visible {
