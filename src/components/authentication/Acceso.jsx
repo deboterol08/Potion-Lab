@@ -12,12 +12,19 @@ import { GiPotionBall, GiSparkles } from "react-icons/gi";
 import { CUENTAS_DEMO, ESPECIALIDADES } from "../../data/seedData";
 import FondoAlquimico from "../common/FondoAlquimico";
 
+// Puerta de entrada de la App
+
+// Evita repetir className = "acceso-campo-formulario"
 const claseCampoAcceso = "acceso-campo-formulario";
 
+// La logica importante es delegada a otros metodos, aqui solo
+// nos encargamos de manejar la interfaz, el form, sus estados, validaciones, y eventos.
 function Acceso({ onLogin, onRegister }) {
   const [modo, setModo] = useState("login");
   const [mostrarPassword, setMostrarPassword] = useState(false);
   const [error, setError] = useState("");
+
+  // se guarda un objeto para que el login aparezca precargado con una cuenta de prueba
   const [formulario, setFormulario] = useState({
     nombreCompleto: "",
     email: CUENTAS_DEMO[0].email,
@@ -26,6 +33,7 @@ function Acceso({ onLogin, onRegister }) {
     avatarUrl: "",
   });
 
+  // se ejecuta cada que se actualicen los datos del form
   function manejarCambio(evento) {
     const { name, value } = evento.target;
 
@@ -33,7 +41,9 @@ function Acceso({ onLogin, onRegister }) {
     setError("");
   }
 
+  // se ejecuta solo cuando se mande el form
   function manejarEnvio(evento) {
+    // validaciones sencillas
     evento.preventDefault();
 
     if (modo === "login") {
@@ -41,6 +51,8 @@ function Acceso({ onLogin, onRegister }) {
       if (!resultado.ok) setError(resultado.mensaje);
       return;
     }
+
+    // si no estamos en login, estamos en el registro
 
     if (formulario.nombreCompleto.trim().length < 3) {
       setError("Escribe tu nombre completo para crear el perfil.");
@@ -52,11 +64,15 @@ function Acceso({ onLogin, onRegister }) {
       return;
     }
 
+    // si pasa las validaciones envia todo el objeto
     onRegister(formulario);
   }
 
+  // se ejecuta cuando haces click en una cuenta demo
   function usarCuenta(cuenta) {
     setModo("login");
+
+    // este setter "autorellena" o actualiza email y password por los de la cuenta demo
     setFormulario((anterior) => ({
       ...anterior,
       email: cuenta.email,
@@ -65,14 +81,16 @@ function Acceso({ onLogin, onRegister }) {
     setError("");
   }
 
+  // El layout del login se penso como un inicio de sesion normal dividido en dos secciones: izquierda (presentacion) y derecha (form)
   return (
     <main className="acceso-pantalla-potion-lab-libera-tu">
       <FondoAlquimico />
 
+      {/* Seccion Izquierda*/}
       <section className="acceso-seccion-potion-lab-libera-tu">
         <div className="acceso-contenedor-flexible-potion-lab-libera-tu">
           <span className="acceso-insignia">
-            <GiPotionBall aria-hidden="true" />
+            <GiPotionBall />
           </span>
           <div>
             <strong className="acceso-dato-destacado-potion-lab">
@@ -86,10 +104,10 @@ function Acceso({ onLogin, onRegister }) {
 
         <div className="acceso-contenedor-nueva-temporada-carnaval-del">
           <p className="acceso-descripcion-nueva-temporada-carnaval-del">
-            <GiSparkles aria-hidden="true" /> Nueva temporada: Carnaval del Atlantis
+            <GiSparkles /> Nueva temporada: Carnaval del Atlantis
           </p>
           <h1 className="acceso-titulo-principal-de-ideas-a-pociones">
-            De ideas a 
+            De ideas a
             <span className="acceso-texto-pociones-definitivas">
               pociones definitivas
             </span>
@@ -100,15 +118,19 @@ function Acceso({ onLogin, onRegister }) {
           </p>
 
           <ul className="acceso-cuadricula-map">
+            {/* Generamos un list por cada del elemento del array. OJO: Hay que usar key */}
             {[
-              "Votos por especialidad",
-              "Tres gremios de prueba",
-              "Grimorio permanente",
+              "Votos segun especialidad",
+              "Tres ordenes distintas",
+              "Catalogo permanente",
               "Ranking de alquimistas",
             ].map((beneficio) => (
-              <li className="acceso-elemento-lista-check-beneficio" key={beneficio}>
+              <li
+                className="acceso-elemento-lista-check-beneficio"
+                key={beneficio}
+              >
                 <span className="acceso-insignia-check">
-                  <FiCheck aria-hidden="true" />
+                  <FiCheck />
                 </span>
                 {beneficio}
               </li>
@@ -117,29 +139,30 @@ function Acceso({ onLogin, onRegister }) {
         </div>
 
         <p className="acceso-descripcion-proyecto-academico-ingenieria">
-          Proyecto académico · Ingeniería Web · 2026
+          Entrega #1: Frontend · Ingeniería Web
         </p>
       </section>
 
+      {/* Seccion Derecha */}
       <section className="acceso-seccion-potion-lab-map-sea">
         <div className="acceso-contenedor-potion-lab-map-sea">
           <div className="acceso-contenedor-flexible-potion-lab">
             <span className="acceso-insignia-logo-movil">
-              <GiPotionBall aria-hidden="true" />
+              <GiPotionBall />
             </span>
-            <strong className="acceso-nombre-logo-movil">
-              Potion Lab
-            </strong>
+            <strong className="acceso-nombre-logo-movil">Potion Lab</strong>
           </div>
 
+          {/* Porcion interactiva*/}
           <div className="acceso-contenedor-map-sea-bienvenido-mago">
             <div className="acceso-selector-modo">
+              {/* Usamos un Array de Arrays para que el JSF genera una interfaz diferente y cambie su contenido mas la forma */}
               {[
                 ["login", "Iniciar sesión"],
                 ["register", "Crear perfil"],
               ].map(([valor, etiqueta]) => (
                 <button
-                className={`acceso-boton-modo ${
+                  className={`acceso-boton-modo ${
                     modo === valor
                       ? "acceso-boton-modo-activo"
                       : "acceso-boton-modo-inactivo"
@@ -154,13 +177,16 @@ function Acceso({ onLogin, onRegister }) {
                   {etiqueta}
                 </button>
               ))}
+              {/* Este particularmente cambia el boton y actualiza el estado. 
+               Boton activo: Login
+               Boton inactivo: Register
+               */}
             </div>
 
+            {/* Usamos textos condicionales para asi reutilizar el contenedor para el login y el crear perfil */}
             <div className="acceso-contenedor-sea-bienvenido-mago-abre">
               <p className="acceso-descripcion-sea-bienvenido-mago">
-                {modo === "login"
-                  ? "Sea bienvenido mago"
-                  : "Aprendiz de mago"}
+                {modo === "login" ? "Sea bienvenido mago" : "Aprendiz de mago"}
               </p>
               <h2 className="acceso-titulo-seccion-abre-tu-portal-magico">
                 {modo === "login"
@@ -169,27 +195,28 @@ function Acceso({ onLogin, onRegister }) {
               </h2>
               <p className="acceso-descripcion-usa-nuestras-cuentas-de">
                 {modo === "login"
-                  ? "Usa nuestras cuentas de prueba para explorar los roles."
+                  ? "Usa nuestras cuentas de prueba para explorar la app."
                   : "Tu perfil se guardará únicamente en este navegador."}
               </p>
             </div>
 
-            <form className="acceso-formulario-correo-mail-contrasena-lock" onSubmit={manejarEnvio}>
+            <form
+              className="acceso-formulario-correo-mail-contrasena-lock"
+              onSubmit={manejarEnvio}
+            >
+              {/* Usamos renderizado condicional para este label exclusivo al crear perfil*/}
               {modo === "register" && (
                 <label className="acceso-etiqueta-campo-nombre-de-usuario-user">
                   <span className="acceso-texto-nombre-de-usuario">
                     Nombre de usuario
                   </span>
                   <span className="acceso-texto-user">
-                    <FiUser
-                      className="acceso-icono-user"
-                      aria-hidden="true"
-                    />
+                    <FiUser className="acceso-icono-user" />
                     <input
                       className={claseCampoAcceso}
                       name="nombreCompleto"
                       onChange={manejarCambio}
-                      placeholder="Nombre del alquimista"
+                      placeholder="Nombre de alquimista"
                       required
                       value={formulario.nombreCompleto}
                     />
@@ -198,20 +225,15 @@ function Acceso({ onLogin, onRegister }) {
               )}
 
               <label className="acceso-etiqueta-campo-correo-mail">
-                <span className="acceso-texto-correo">
-                  Correo 
-                </span>
+                <span className="acceso-texto-correo">Correo</span>
                 <span className="acceso-texto-mail">
-                  <FiMail
-                    className="acceso-icono-mail"
-                    aria-hidden="true"
-                  />
+                  <FiMail className="acceso-icono-mail" />
                   <input
                     autoComplete="username"
                     className={claseCampoAcceso}
                     name="email"
                     onChange={manejarCambio}
-                    placeholder="nombre@universidad.edu"
+                    placeholder="nombre@eia.edu.co"
                     required
                     type="email"
                     value={formulario.email}
@@ -219,15 +241,12 @@ function Acceso({ onLogin, onRegister }) {
                 </span>
               </label>
 
+              {/* Para poder mostrar/ocultar la contraseña el atributo type cambia de estado. El setter se actualiza mediante el boton (no cambia lo escrito, solo la forma en la que el navegador representa la info)*/}
+
               <label className="acceso-etiqueta-campo-contrasena-lock">
-                <span className="acceso-texto-contrasena">
-                  Contraseña
-                </span>
+                <span className="acceso-texto-contrasena">Contraseña</span>
                 <span className="acceso-texto-lock">
-                  <FiLock
-                    className="acceso-icono-lock"
-                    aria-hidden="true"
-                  />
+                  <FiLock className="acceso-icono-lock" />
                   <input
                     autoComplete={
                       modo === "login" ? "current-password" : "new-password"
@@ -249,15 +268,14 @@ function Acceso({ onLogin, onRegister }) {
                     onClick={() => setMostrarPassword((visible) => !visible)}
                     type="button"
                   >
-                    {mostrarPassword ? (
-                      <FiEyeOff aria-hidden="true" />
-                    ) : (
-                      <FiEye aria-hidden="true" />
-                    )}
+                    {mostrarPassword ? <FiEyeOff /> : <FiEye />}
                   </button>
                 </span>
               </label>
 
+              {/* Usamos renderizado condicional para estos labels exclusivos al crear perfil
+                  y los agrupamos usando React Fragment. OJO: Es importante hacer los inputs controlados para "sincronizar" el estado y evitar errores.
+              */}
               {modo === "register" && (
                 <>
                   <label className="acceso-etiqueta-campo-especialidad-map">
@@ -291,26 +309,18 @@ function Acceso({ onLogin, onRegister }) {
                 </>
               )}
 
-              {error && (
-                <p
-                  className="acceso-descripcion-error"
-                  role="alert"
-                >
-                  {error}
-                </p>
-              )}
+              {error && <p className="acceso-descripcion-error">{error}</p>}
 
               <button
                 className="acceso-boton-entra-a-tu-laboratorio"
                 type="submit"
               >
-                {modo === "login"
-                  ? "Entra a tu laboratorio"
-                  : "Crear perfil"}
-                <FiArrowRight aria-hidden="true" />
+                {modo === "login" ? "Entra a tu laboratorio" : "Crear perfil"}
+                <FiArrowRight />
               </button>
             </form>
 
+            {/* Misma idea (render condicional): las cuentas deben desaparecer en modo registro*/}
             {modo === "login" && (
               <div className="acceso-contenedor-cuentas-de-prueba-acceso">
                 <p className="acceso-descripcion-cuentas-de-prueba-acceso">
@@ -327,9 +337,7 @@ function Acceso({ onLogin, onRegister }) {
                       <strong className="acceso-dato-destacado-etiqueta">
                         {cuenta.etiqueta}
                       </strong>
-                      <span className="acceso-texto-email">
-                        {cuenta.email}
-                      </span>
+                      <span className="acceso-texto-email">{cuenta.email}</span>
                     </button>
                   ))}
                 </div>
@@ -342,4 +350,4 @@ function Acceso({ onLogin, onRegister }) {
   );
 }
 
-export default Acceso;  
+export default Acceso;

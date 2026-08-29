@@ -1,37 +1,44 @@
+// Calculos de votos.
+
+// El enunciado nos dice lo siguiente:
+// ingrediente ---> Herbalista
+// metodo --->Runista
+//frasco ---> Catador
+
 const ESPECIALIDAD_POR_CATEGORIA = {
   ingrediente: "Herbalista",
   metodo: "Runista",
   frasco: "Catador",
 };
 
-// El enunciado no fija el multiplicador de Herbalista, Runista y Catador.
-// Se centraliza en una constante para que el equipo pueda cambiarlo fácilmente.
-const PESO_ESPECIALISTA = 1.5;
+// Ademas, todo voto especializado vale:
+const PESO_ESPECIALISTA = 1.2;
 
+// Calcula cuanto vale el voto del usuario en una categoria.
+// Por defecto: si no hay catadorOficial ponlo false de una vez
+// Devuelve un numero
 export function obtenerPesoVoto(usuario, categoriaId, catadorOficial = false) {
   let peso = 1;
-
-  if (usuario.especialidad === "Maestro cervecero") {
-    peso = 1.2;
-  } else if (ESPECIALIDAD_POR_CATEGORIA[categoriaId] === usuario.especialidad) {
+  const esMaestroCervecero = usuario.especialidad === "Maestro cervecero";
+  const esEspecialistaCategoria = ESPECIALIDAD_POR_CATEGORIA[categoriaId] === usuario.especialidad;
+  
+  if (esMaestroCervecero || esEspecialistaCategoria) {
     peso = PESO_ESPECIALISTA;
   }
 
+  // El Catador Oficial tiene voto doble en todas las categorias.
   return catadorOficial ? peso * 2 : peso;
 }
 
-export function calcularResultados(
-  categoria,
-  opcionSeleccionada,
-  pesoVoto = 1,
-  veto = null,
-) {
+// Calcula votos totales y porcentajes de cada opcion.
+// Devuelve un array de objetos
+export function calcularResultados(categoria, opcionSeleccionada, pesoVoto = 1, veto = null) {
   const opcionesConTotales = categoria.opciones.map((opcion) => ({
     ...opcion,
+    // copia las opciones y 
     vetada: veto?.categoriaId === categoria.id && veto?.opcionId === opcion.id,
     totalVotos:
-      opcion.votosIniciales +
-      (opcion.id === opcionSeleccionada ? pesoVoto : 0),
+      opcion.votosIniciales + (opcion.id === opcionSeleccionada ? pesoVoto : 0),
   }));
 
   const totalGeneral = opcionesConTotales.reduce(
@@ -44,7 +51,9 @@ export function calcularResultados(
   return opcionesConTotales.map((opcion, indice) => {
     const esUltima = indice === opcionesConTotales.length - 1;
     const porcentajeCalculado =
-      totalGeneral === 0 ? 0 : Math.round((opcion.totalVotos / totalGeneral) * 100);
+      totalGeneral === 0
+        ? 0
+        : Math.round((opcion.totalVotos / totalGeneral) * 100);
     const porcentaje = esUltima
       ? Math.max(0, 100 - porcentajeAcumulado)
       : porcentajeCalculado;
@@ -80,7 +89,7 @@ function resolverEmpate(opcionesEmpatadas, formula) {
   };
 }
 
-export function calcularGanador(categoria, formula, opcionSeleccionada, pesoVoto) {
+export function calcularGanador(categoria,formula,opcionSeleccionada,pesoVoto) {
   const resultados = calcularResultados(
     categoria,
     opcionSeleccionada,

@@ -1,6 +1,7 @@
 function FondoAlquimico() {
-  // Es un div decorativo. Todo su aspecto está en una clase de index.css.
-  return <div aria-hidden="true" className="fondo-alquimico-contenedor" />;
+  // Es solo un div decorativo.
+  // Todo su aspecto esta en una clase de styles: common.css
+  return <div className="fondo-alquimico-contenedor" />;
 }
 
 export default FondoAlquimico;

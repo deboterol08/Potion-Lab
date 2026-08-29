@@ -1,3 +1,5 @@
+// Nos apoyamos con IA para hacer unos formatters que hicieran el display de los datos mas bonito
+
 export function obtenerIniciales(nombre = "") {
   return nombre
     .trim()

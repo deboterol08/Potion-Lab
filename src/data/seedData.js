@@ -1,4 +1,6 @@
-/* Data Seeder Generado 100% usando IA */
+/* Data Seeder variado generado con ayuda de IA. 
+   Es la base de datos fake que vamos a usar como motor inicial de la App 
+   Todo lleva export porque vamos a usar las ctes desde otros archivos*/
 
 export const ESPECIALIDADES = [
   "Herbalista",
@@ -17,7 +19,7 @@ export const ESTADOS_FORMULA = {
 export const USUARIOS_DEMO = [
   {
     id: "u1",
-    nombreCompleto: "Simón Álvarez",
+    nombreCompleto: "Simón Alvarez",
     email: "simon@potionlab.edu",
     especialidad: "Herbalista",
     avatarUrl: "",
@@ -154,7 +156,7 @@ export const CUENTAS_DEMO = [
     email: "simon@potionlab.edu",
     password: "pocion123",
     usuarioId: "u1",
-    etiqueta: "Gran Maestre",
+    etiqueta: "Grand Master",
   },
   {
     email: "kael@potionlab.edu",
@@ -164,6 +166,9 @@ export const CUENTAS_DEMO = [
   },
 ];
 
+/* Una pequeña factory function auxiliar para hacer mas facil la declaracion de miembro()
+   se usa dentro de gremios para no tener que escribir tanto
+*/
 function miembro(usuarioId, rol, fechaIngreso) {
   return { usuarioId, rol, fechaIngreso };
 }
@@ -272,6 +277,10 @@ const DEFINICION_CATEGORIAS = [
     ],
   },
 ];
+
+/* Cada fila es una categoria, cada columna es una opcion, se le da un valor por defecto para que si no ingresa nada automaticamente ponga un 0 */
+
+/* Los maps copian la categoria y reemplazan las opciones para que ademas tengan votos, agrega esos votos iniciales solo si encuentra la categoria, y para manejo de los nulls los cambia por un 0 */
 
 export function crearCategorias(
   votos = [

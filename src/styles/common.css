@@ -1,10 +1,7 @@
-/* Estilos semánticos generados a partir del diseño original. */
-
-
 
 .modal-descripcion {
   margin-top: 0.5rem;
-  font-size: .875rem;
+  font-size: 0.875rem;
   line-height: 1.5rem;
   color: #90a1b9;
 }
@@ -15,7 +12,7 @@
 }
 
 .modal-titulo-seccion {
-  font-family: Cinzel,Georgia,serif;
+  font-family: Cinzel, Georgia, serif;
   font-size: 1.5rem;
   font-weight: 600;
   color: #fff;
@@ -33,8 +30,8 @@
 }
 
 .aviso-boton-cerrar-aviso {
-  border-radius: .375rem;
-  padding: .25rem;
+  border-radius: 0.375rem;
+  padding: 0.25rem;
   color: #62748e;
 }
 
@@ -57,7 +54,7 @@
 .estado-vacio-descripcion {
   margin-top: 0.5rem;
   max-width: 28rem;
-  font-size: .875rem;
+  font-size: 0.875rem;
   line-height: 1.5rem;
   color: #90a1b9;
 }
@@ -68,9 +65,9 @@
   border-style: solid;
   padding-left: 0.75rem;
   padding-right: 0.75rem;
-  padding-top: .25rem;
-  padding-bottom: .25rem;
-  font-size: .75rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  font-size: 0.75rem;
   font-weight: 700;
   border-width: 1px;
   border-radius: 9999px;
@@ -95,11 +92,13 @@
 }
 
 .fondo-alquimico-contenedor {
-  z-index: -1;
-  pointer-events: none;
-  background: radial-gradient(circle at 0 0,#9b87f52e,#0000 35%),radial-gradient(circle at 100% 100%,#55d9e81a,#0000 30%),#080a16;
-  position: fixed;
-  inset: 0;
+  z-index: -1; /* por defecto al ser un fondo debe quedar mas atras que los otros elementos*/
+  pointer-events: none; /* al ser un fondo no debe recibir clicks del mouse*/
+  background:
+    radial-gradient(circle at 0 0, #9b87f52e, #0000 35%),
+    radial-gradient(circle at 100% 100%, #55d9e81a, #0000 30%), #080a16;
+  position: fixed; /* es un fondo, debe ocupar toda la pantalla */
+  inset: 0; /* es decir que top,right, bot y left = 0*/
 }
 
 .insignia-estado-tono-ambar {
@@ -111,7 +110,7 @@
 .modal-boton-cerrar-ventana {
   width: 2.5rem;
   height: 2.5rem;
-  border-radius: .75rem;
+  border-radius: 0.75rem;
   background-color: #ffffff0d;
   flex-shrink: 0;
   place-items: center;
@@ -151,7 +150,7 @@
 .encabezado-pagina-descripcion {
   margin-top: 0.75rem;
   max-width: 42rem;
-  font-size: .875rem;
+  font-size: 0.875rem;
   line-height: 1.75rem;
   color: #90a1b9;
 }
@@ -194,10 +193,10 @@
 }
 
 .encabezado-pagina-titulo-principal {
-  font-family: Cinzel,Georgia,serif;
+  font-family: Cinzel, Georgia, serif;
   font-size: 1.875rem;
   font-weight: 600;
-  letter-spacing: -.025em;
+  letter-spacing: -0.025em;
   color: #fff;
 }
 
@@ -221,7 +220,7 @@
 .tarjeta-estadistica-insignia-icono {
   width: 2.75rem;
   height: 2.75rem;
-  border-radius: .75rem;
+  border-radius: 0.75rem;
   flex-shrink: 0;
   place-items: center;
   display: grid;
@@ -243,16 +242,16 @@
 
 .encabezado-pagina-descripcion-etiqueta {
   margin-bottom: 0.5rem;
-  font-size: .75rem;
+  font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: .05em;
+  letter-spacing: 0.05em;
   color: #53eafd;
   text-transform: uppercase;
 }
 
 .tarjeta-estadistica-descripcion-detalle {
-  margin-top: .25rem;
-  font-size: .75rem;
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
   color: #90a1b9;
 }
 
@@ -265,9 +264,9 @@
 }
 
 .tarjeta-estadistica-descripcion-etiqueta {
-  font-size: .75rem;
+  font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: .05em;
+  letter-spacing: 0.05em;
   color: #62748e;
   text-transform: uppercase;
 }
@@ -304,9 +303,11 @@
   padding-right: 1rem;
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
-  font-size: .875rem;
+  font-size: 0.875rem;
   color: #e2e8f0;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -4px rgba(0, 0, 0, 0.1);
 }
 
 .estado-vacio-contenedor-flexible-titulo-descripcion {
