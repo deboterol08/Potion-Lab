@@ -2,7 +2,6 @@ import { Outlet } from "react-router-dom";
 import FondoAlquimico from "../common/FondoAlquimico";
 import BarraLateral from "./BarraLateral";
 import BarraSuperior from "./BarraSuperior";
-import NavegacionMovil from "./NavegacionMovil";
 
 function LayoutPrincipal({ onLogout }) {
   return (

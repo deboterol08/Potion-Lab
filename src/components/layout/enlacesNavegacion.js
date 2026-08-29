@@ -1,6 +1,6 @@
 import { FiAward, FiBookOpen, FiGrid, FiLayers, FiUsers } from "react-icons/fi";
 
-// Iconos de Feather usados mediante React Icons: https://react-icons.github.io/react-icons/
+// Iconos de Feather usados mediante React Icons: https://feathericons.com/
 const enlacesNavegacion = [
   { to: "/", etiqueta: "Resumen", icono: FiGrid, exacto: true },
   { to: "/gremios", etiqueta: "Gremios", icono: FiUsers },

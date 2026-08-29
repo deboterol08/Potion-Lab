@@ -18,7 +18,6 @@ import FormulasPage from "./pages/FormulasPage";
 import GremioDetallePage from "./pages/GremioDetallePage";
 import GremiosPage from "./pages/GremiosPage";
 import GrimorioPage from "./pages/GrimorioPage";
-import NoEncontradaPage from "./pages/NoEncontradaPage";
 import NuevaFormulaPage from "./pages/NuevaFormulaPage";
 import PerfilPage from "./pages/PerfilPage";
 import RankingPage from "./pages/RankingPage";
@@ -121,14 +120,13 @@ function App() {
   // agregar    -> spread (...)
   // modificar  -> map()
   // eliminar   -> filter()
-   
+
   // Si el dato esta anidado, se combinan map() y spread para copiar
   // cada nivel sin modificar directamente el estado anterior
 
-  // todo setter viene de useLocalStorage asi que al actualizar el 
+  // todo setter viene de useLocalStorage asi que al actualizar el
   // estado los datos tambien quedan almacenados en el mismo navegador
   // -------------------------------------------------------------------------------------------------
-
 
   // es la funcion que Acceso.jsx recibe como onLogin
   function iniciarSesion(email, password) {
@@ -227,7 +225,7 @@ function App() {
       ],
     };
 
-    // Le agregamos el estado al final y lo guardamos en LocalStorage 
+    // Le agregamos el estado al final y lo guardamos en LocalStorage
     setGremios((anteriores) => [...anteriores, nuevoGremio]);
 
     mostrarAviso(
@@ -280,7 +278,7 @@ function App() {
     mostrarAviso(`Ahora perteneces a ${gremio.nombre}.`);
     return { ok: true };
   }
-   
+
   // Asciende un usuario dentro de un gremio a "moderador"
   function cambiarRol(gremioId, usuarioId, nuevoRol) {
     const gremio = gremios.find((item) => item.id === gremioId);
@@ -291,8 +289,8 @@ function App() {
         miembro.rol === "Alquimista sénior" && miembro.usuarioId !== usuarioId,
     ).length;
 
-    // Validacion del enunciado 
-    // 1) Senior Alchemist --> max 3. 
+    // Validacion del enunciado
+    // 1) Senior Alchemist --> max 3.
     if (nuevoRol === "Alquimista sénior" && cantidadSenior >= 3) {
       mostrarAviso(
         "El gremio ya alcanzó el máximo de tres Alquimistas sénior.",
@@ -324,8 +322,8 @@ function App() {
       anteriores.map((gremio) =>
         gremio.id === gremioId
           ? // crea una copia modificada en donde recorre los miembros y separa en tres casos:
-          // si el usuario es elegido se le da el rol, si ya habia otro catador (los cambia modificando ambos), si esta persona fue elegida ni es el catador no hagas nada
-          {
+            // si el usuario es elegido se le da el rol, si ya habia otro catador (los cambia modificando ambos), si esta persona fue elegida ni es el catador no hagas nada
+            {
               ...gremio,
               miembros: gremio.miembros.map((miembro) => {
                 if (miembro.usuarioId === usuarioId) {
@@ -343,12 +341,12 @@ function App() {
     mostrarAviso("Un nuevo Catador Oficial fue nombrado.");
   }
 
-  // los datos vienen del form de creacion de formula 
+  // los datos vienen del form de creacion de formula
   // Es la funcion que NuevaFormulaPage.jsx recibe como OnCreateFormula
   function crearFormula(datos) {
     const gremio = gremios.find((item) => item.id === datos.gremioId);
 
-    // Validacion 
+    // Validacion
     if (!gremio || !puedeCrearFormula(gremio, usuarioActivo)) {
       return {
         ok: false,
@@ -368,13 +366,13 @@ function App() {
       estado: "proposal",
       creadaPorId: usuarioActivo.id,
       fechaCreacion: new Date().toISOString(),
-      fechaCierre: datos.fechaCierre, 
+      fechaCierre: datos.fechaCierre,
       categorias: datos.categorias,
-      desempate: {}, // se usa despues si lo hay 
+      desempate: {}, // se usa despues si lo hay
       veto: null, // nadie ha usado el veto todavia
     };
 
-    // Agregacion del estado (al principio) y lo guardamos en LocalStorage 
+    // Agregacion del estado (al principio) y lo guardamos en LocalStorage
     setFormulas((anteriores) => [nuevaFormula, ...anteriores]);
     setAuditoria((anterior) => [
       {
@@ -392,14 +390,14 @@ function App() {
 
   // Es la funcion que FormulaDetallePage.jsx recibe como onVote
   function votar(formulaId, categoriaId, opcionId) {
-      // Busca formula, si existe busca gremio, si existe busca si usuario pertenece a gremio
+    // Busca formula, si existe busca gremio, si existe busca si usuario pertenece a gremio
     const formula = formulas.find((item) => item.id === formulaId);
     const gremio = gremios.find((item) => item.id === formula?.gremioId);
     const esMiembro = gremio?.miembros.some(
       (miembro) => miembro.usuarioId === usuarioActivo.id,
     );
-    
-    //  Validacion 
+
+    //  Validacion
     if (formula?.estado !== "voting" || !esMiembro) return;
 
     // Actualizamos su estado, misma logica que forms pero con una capa adicional porque votos es un objeto que puede cambiar tanto su formula como su categoria
@@ -462,7 +460,6 @@ function App() {
 
   // Es la función que FormulaDetallePage.jsx recibe como onTransition.
   function cambiarEstado(formulaId, nuevoEstado) {
-
     // Busca la formula
     const formula = formulas.find((item) => item.id === formulaId);
 
@@ -521,7 +518,7 @@ function App() {
       return;
     }
 
-    // Se pasa el objeto entero de la formula 
+    // Se pasa el objeto entero de la formula
     const nuevaPocion = crearPocionDesdeFormula(
       formula,
       votos[formulaId] ?? {}, // Si no existen votos para una formula, usa un objeto vacio.
@@ -565,10 +562,9 @@ function App() {
 
   // Es la función que PerfilPage.jsx recibe como onSaveProfile.
   function guardarPerfil(datos) {
-
-    // El orden aqui es clave, si una propiedad se repite, la última gana, por eso copiamos primero los datos viejos y luego los actualizados. Esto es lo que hacen las paginas para que un usuario pueda actualizar su perfil si su sesion esta activa 
+    // El orden aqui es clave, si una propiedad se repite, la última gana, por eso copiamos primero los datos viejos y luego los actualizados. Esto es lo que hacen las paginas para que un usuario pueda actualizar su perfil si su sesion esta activa
     const actualizado = { ...usuarioActivo, ...datos };
-    
+
     setUsuarioActivo(actualizado);
 
     setUsuarios((anteriores) =>
@@ -687,11 +683,11 @@ function App() {
               />
             }
           />
-          <Route path="*" element={<NoEncontradaPage />} />
         </Route>
       </Routes>
       <Aviso mensaje={aviso} onCerrar={() => setAviso("")} />
     </UsuarioContext.Provider>
+    // La linea 693 sera la que nos permita cerrar los avisos/notificaciones
   );
 }
 

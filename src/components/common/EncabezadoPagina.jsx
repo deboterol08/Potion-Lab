@@ -1,3 +1,5 @@
+// Componente reutilizable para mostrar el encabezado de las distintas paginas.
+
 function EncabezadoPagina({ etiqueta, titulo, descripcion, acciones }) {
   return (
     <header className="encabezado-pagina-encabezado-titulo">
@@ -16,6 +18,7 @@ function EncabezadoPagina({ etiqueta, titulo, descripcion, acciones }) {
           </p>
         )}
       </div>
+      {/* acciones puede recibir JSX, por ejemplo un boton o un link. */}
       {acciones && <div className="encabezado-pagina-contenedor-flexible-acciones">{acciones}</div>}
     </header>
   );
