@@ -1,3 +1,5 @@
+/* Data Seeder Generado 100% usando IA */
+
 export const ESPECIALIDADES = [
   "Herbalista",
   "Runista",
@@ -227,8 +229,18 @@ const DEFINICION_CATEGORIAS = [
     nombre: "Ingrediente base",
     descripcion: "Define el carácter principal de la poción.",
     opciones: [
-      { id: "mandragora", nombre: "Raíz de mandrágora", sigla: "RM", peso: 1.3 },
-      { id: "polvo-estelar", nombre: "Polvo de estrellas", sigla: "PE", peso: 1.7 },
+      {
+        id: "mandragora",
+        nombre: "Raíz de mandrágora",
+        sigla: "RM",
+        peso: 1.3,
+      },
+      {
+        id: "polvo-estelar",
+        nombre: "Polvo de estrellas",
+        sigla: "PE",
+        peso: 1.7,
+      },
     ],
   },
   {
@@ -237,7 +249,12 @@ const DEFINICION_CATEGORIAS = [
     descripcion: "Determina la estabilidad durante la preparación.",
     opciones: [
       { id: "llama-azul", nombre: "Llama azul", sigla: "LA", peso: 1.2 },
-      { id: "bano-arcano", nombre: "Baño de agua arcana", sigla: "BA", peso: 1.5 },
+      {
+        id: "bano-arcano",
+        nombre: "Baño de agua arcana",
+        sigla: "BA",
+        peso: 1.5,
+      },
     ],
   },
   {
@@ -246,12 +263,23 @@ const DEFINICION_CATEGORIAS = [
     descripcion: "Conserva y presenta la destilación final.",
     opciones: [
       { id: "cristal-lunar", nombre: "Cristal lunar", sigla: "CL", peso: 1.1 },
-      { id: "calavera-plata", nombre: "Calavera de plata", sigla: "CP", peso: 1.4 },
+      {
+        id: "calavera-plata",
+        nombre: "Calavera de plata",
+        sigla: "CP",
+        peso: 1.4,
+      },
     ],
   },
 ];
 
-export function crearCategorias(votos = [[0, 0], [0, 0], [0, 0]]) {
+export function crearCategorias(
+  votos = [
+    [0, 0],
+    [0, 0],
+    [0, 0],
+  ],
+) {
   return DEFINICION_CATEGORIAS.map((categoria, indiceCategoria) => ({
     ...categoria,
     opciones: categoria.opciones.map((opcion, indiceOpcion) => ({
@@ -279,7 +307,8 @@ export const FORMULAS_INICIALES = [
     id: "f2",
     gremioId: "g2",
     nombrePocion: "Memoria de Escarcha",
-    efectoDeseado: "Conservar un recuerdo con absoluta claridad por una semana.",
+    efectoDeseado:
+      "Conservar un recuerdo con absoluta claridad por una semana.",
     dificultad: 3,
     estado: "proposal",
     creadaPorId: "u8",
@@ -298,7 +327,11 @@ export const FORMULAS_INICIALES = [
     creadaPorId: "u3",
     fechaCreacion: "2026-08-24T14:00:00Z",
     fechaCierre: "2026-09-01T22:00:00Z",
-    categorias: crearCategorias([[3, 2], [2, 3], [2, 3]]),
+    categorias: crearCategorias([
+      [3, 2],
+      [2, 3],
+      [2, 3],
+    ]),
     desempate: { catador: "polvo-estelar", granMaestre: "mandragora" },
     veto: null,
   },
@@ -312,7 +345,11 @@ export const FORMULAS_INICIALES = [
     creadaPorId: "u8",
     fechaCreacion: "2026-08-23T12:00:00Z",
     fechaCierre: "2026-08-31T20:00:00Z",
-    categorias: crearCategorias([[2, 2], [1, 3], [2, 2]]),
+    categorias: crearCategorias([
+      [2, 2],
+      [1, 3],
+      [2, 2],
+    ]),
     desempate: { catador: "cristal-lunar", granMaestre: "polvo-estelar" },
     veto: null,
   },
@@ -320,13 +357,18 @@ export const FORMULAS_INICIALES = [
     id: "f5",
     gremioId: "g3",
     nombrePocion: "Tinta de los Susurros",
-    efectoDeseado: "Revelar durante un minuto palabras escritas con tinta invisible.",
+    efectoDeseado:
+      "Revelar durante un minuto palabras escritas con tinta invisible.",
     dificultad: 4,
     estado: "voting",
     creadaPorId: "u12",
     fechaCreacion: "2026-08-22T18:00:00Z",
     fechaCierre: "2026-09-01T23:30:00Z",
-    categorias: crearCategorias([[1, 2], [1, 2], [1, 2]]),
+    categorias: crearCategorias([
+      [1, 2],
+      [1, 2],
+      [1, 2],
+    ]),
     desempate: { catador: "bano-arcano", granMaestre: "llama-azul" },
     veto: null,
   },
@@ -340,7 +382,11 @@ export const FORMULAS_INICIALES = [
     creadaPorId: "u1",
     fechaCreacion: "2026-08-17T11:00:00Z",
     fechaCierre: "2026-08-24T11:00:00Z",
-    categorias: crearCategorias([[2, 1], [2, 1], [2, 1]]),
+    categorias: crearCategorias([
+      [2, 1],
+      [2, 1],
+      [2, 1],
+    ]),
     desempate: { catador: "mandragora", granMaestre: "llama-azul" },
     veto: null,
   },
@@ -362,7 +408,8 @@ export const FORMULAS_INICIALES = [
     id: "f8",
     gremioId: "g1",
     nombrePocion: "Rocío de Medianoche",
-    efectoDeseado: "Recuperar la vitalidad de plantas expuestas a calor intenso.",
+    efectoDeseado:
+      "Recuperar la vitalidad de plantas expuestas a calor intenso.",
     dificultad: 2,
     estado: "distilled",
     creadaPorId: "u5",

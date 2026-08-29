@@ -3,15 +3,15 @@ import { formatearFecha, obtenerIniciales } from "../../utils/formatters";
 
 function ListaMiembros({ gremio, usuarios, puedeAdministrar, onChangeRole, onAppointTaster }) {
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full min-w-[680px] border-collapse text-left">
+    <div className="lista-miembros-contenedor-alquimista-especialidad-ingreso-rol">
+      <table className="lista-miembros-tabla-alquimista-especialidad-ingreso-rol">
         <thead>
-          <tr className="border-b border-white/8 text-[10px] font-extrabold tracking-[0.15em] text-slate-600 uppercase">
-            <th className="px-4 py-3">Alquimista</th>
-            <th className="px-4 py-3">Especialidad</th>
-            <th className="px-4 py-3">Ingreso</th>
-            <th className="px-4 py-3">Rol</th>
-            {puedeAdministrar && <th className="px-4 py-3 text-right">Acciones</th>}
+          <tr className="lista-miembros-fila-tabla-alquimista-especialidad-ingreso-rol">
+            <th className="lista-miembros-titulo-columna-alquimista">Alquimista</th>
+            <th className="lista-miembros-titulo-columna-especialidad">Especialidad</th>
+            <th className="lista-miembros-titulo-columna-ingreso">Ingreso</th>
+            <th className="lista-miembros-titulo-columna-rol">Rol</th>
+            {puedeAdministrar && <th className="lista-miembros-titulo-columna-acciones">Acciones</th>}
           </tr>
         </thead>
         <tbody>
@@ -20,46 +20,46 @@ function ListaMiembros({ gremio, usuarios, puedeAdministrar, onChangeRole, onApp
             if (!usuario) return null;
 
             return (
-              <tr className="border-b border-white/6 text-sm last:border-0" key={miembro.usuarioId}>
-                <td className="px-4 py-4">
-                  <div className="flex items-center gap-3">
-                    <span className="grid size-9 place-items-center rounded-xl bg-white/5 text-[10px] font-extrabold text-slate-300 ring-1 ring-white/8">
+              <tr className="lista-miembros-fila-tabla-iniciales-nombre-completo-email" key={miembro.usuarioId}>
+                <td className="lista-miembros-celda-iniciales-nombre-completo-email">
+                  <div className="lista-miembros-contenedor-flexible-iniciales-nombre-completo-email">
+                    <span className="lista-miembros-insignia-iniciales">
                       {obtenerIniciales(usuario.nombreCompleto)}
                     </span>
                     <span>
-                      <strong className="block text-xs text-slate-200">{usuario.nombreCompleto}</strong>
-                      <small className="text-[10px] text-slate-600">{usuario.email}</small>
+                      <strong className="lista-miembros-dato-destacado-nombre-completo">{usuario.nombreCompleto}</strong>
+                      <small className="lista-miembros-detalle-email">{usuario.email}</small>
                     </span>
                   </div>
                 </td>
-                <td className="px-4 py-4 text-xs text-slate-400">{usuario.especialidad}</td>
-                <td className="px-4 py-4 text-xs text-slate-500">{formatearFecha(miembro.fechaIngreso)}</td>
-                <td className="px-4 py-4">
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-white/5 px-2.5 py-1 text-[10px] font-bold text-slate-300 ring-1 ring-white/8">
-                    {miembro.rol === "Gran Maestre" && <FiStar aria-hidden="true" className="text-amber-300" />}
-                    {miembro.rol === "Catador oficial" && <FiShield aria-hidden="true" className="text-cyan-300" />}
+                <td className="lista-miembros-celda-especialidad">{usuario.especialidad}</td>
+                <td className="lista-miembros-celda-fecha">{formatearFecha(miembro.fechaIngreso)}</td>
+                <td className="lista-miembros-celda-rol">
+                  <span className="lista-miembros-texto-rol">
+                    {miembro.rol === "Gran Maestre" && <FiStar aria-hidden="true" className="lista-miembros-icono-star" />}
+                    {miembro.rol === "Catador oficial" && <FiShield aria-hidden="true" className="lista-miembros-icono-shield" />}
                     {miembro.rol}
                   </span>
                 </td>
                 {puedeAdministrar && (
-                  <td className="px-4 py-4 text-right">
+                  <td className="lista-miembros-celda">
                     {miembro.rol !== "Gran Maestre" && (
-                      <div className="inline-flex items-center gap-2">
-                        <label className="relative">
-                          <span className="sr-only">Cambiar rol de {usuario.nombreCompleto}</span>
+                      <div className="lista-miembros-contenedor-flexible-cambiar-rol-de-nombre">
+                        <label className="lista-miembros-etiqueta-campo-cambiar-rol-de-nombre">
+                          <span className="lista-miembros-texto-cambiar-rol-de-nombre">Cambiar rol de {usuario.nombreCompleto}</span>
                           <select
-                            className="focus-ring appearance-none rounded-lg border border-white/8 bg-[#15182e] py-2 pr-8 pl-3 text-[10px] font-bold text-slate-300"
+                            className="lista-miembros-selector-aprendiz-alquimista-senior"
                             onChange={(evento) => onChangeRole(miembro.usuarioId, evento.target.value)}
                             value={miembro.rol === "Catador oficial" ? "Aprendiz" : miembro.rol}
                           >
                             <option>Aprendiz</option>
                             <option>Alquimista sénior</option>
                           </select>
-                          <FiChevronDown className="pointer-events-none absolute top-1/2 right-2 -translate-y-1/2 text-slate-600" aria-hidden="true" />
+                          <FiChevronDown className="lista-miembros-icono-chevron-down" aria-hidden="true" />
                         </label>
                         {miembro.rol !== "Catador oficial" && (
                           <button
-                            className="focus-ring rounded-lg border border-cyan-300/15 bg-cyan-300/6 px-3 py-2 text-[10px] font-bold text-cyan-200 transition hover:bg-cyan-300/10"
+                            className="lista-miembros-boton-nombrar-catador"
                             onClick={() => onAppointTaster(miembro.usuarioId)}
                             type="button"
                           >

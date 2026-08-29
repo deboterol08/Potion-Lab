@@ -21,10 +21,10 @@ function FormulasPage({ formulas, gremios, usuarios, votos }) {
   });
 
   return (
-    <div className="space-y-8">
+    <div className="formulas-lista-vertical-buscar-formulas-search-filter">
       <EncabezadoPagina
         acciones={
-          <Link className="focus-ring flex items-center gap-2 rounded-xl bg-violet-500 px-4 py-3 text-xs font-extrabold text-white transition hover:-translate-y-0.5 hover:bg-violet-400" to="/formulas/nueva">
+          <Link className="formulas-enlace-formulas-nueva" to="/formulas/nueva">
             <FiPlus aria-hidden="true" /> Nueva fórmula
           </Link>
         }
@@ -33,21 +33,21 @@ function FormulasPage({ formulas, gremios, usuarios, votos }) {
         titulo="Fórmulas"
       />
 
-      <section className="glass-panel grid gap-3 rounded-2xl p-3 md:grid-cols-[1fr_auto_auto]">
-        <label className="relative">
-          <span className="sr-only">Buscar fórmulas</span>
-          <FiSearch className="absolute top-1/2 left-4 -translate-y-1/2 text-slate-600" aria-hidden="true" />
+      <section className="formulas-cuadricula-buscar-formulas-search-filter">
+        <label className="formulas-etiqueta-campo-buscar-formulas-search">
+          <span className="formulas-texto-buscar-formulas">Buscar fórmulas</span>
+          <FiSearch className="formulas-icono-search" aria-hidden="true" />
           <input
-            className="focus-ring w-full rounded-xl border border-white/8 bg-black/15 py-3 pr-4 pl-11 text-sm text-white outline-none placeholder:text-slate-600"
+            className="formulas-campo-buscar-formula-o-efecto"
             onChange={(evento) => setBusqueda(evento.target.value)}
             placeholder="Buscar fórmula o efecto..."
             value={busqueda}
           />
         </label>
-        <label className="relative">
-          <FiFilter className="pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-slate-600" aria-hidden="true" />
-          <span className="sr-only">Filtrar por estado</span>
-          <select className="focus-ring min-w-44 appearance-none rounded-xl border border-white/8 bg-[#15182e] py-3 pr-8 pl-10 text-xs font-bold text-slate-300" onChange={(evento) => setEstado(evento.target.value)} value={estado}>
+        <label className="formulas-etiqueta-campo-filter-filtrar-por-estado">
+          <FiFilter className="formulas-icono-filter" aria-hidden="true" />
+          <span className="formulas-texto-filtrar-por-estado">Filtrar por estado</span>
+          <select className="formulas-selector-todos-los-estados-map" onChange={(evento) => setEstado(evento.target.value)} value={estado}>
             <option value="todos">Todos los estados</option>
             {Object.entries(ESTADOS_FORMULA).map(([id, datos]) => (
               <option key={id} value={id}>{datos.etiqueta}</option>
@@ -55,21 +55,21 @@ function FormulasPage({ formulas, gremios, usuarios, votos }) {
           </select>
         </label>
         <label>
-          <span className="sr-only">Filtrar por gremio</span>
-          <select className="focus-ring min-w-44 rounded-xl border border-white/8 bg-[#15182e] px-4 py-3 text-xs font-bold text-slate-300" onChange={(evento) => setGremioId(evento.target.value)} value={gremioId}>
+          <span className="formulas-texto-filtrar-por-gremio">Filtrar por gremio</span>
+          <select className="formulas-selector-todos-los-gremios-map" onChange={(evento) => setGremioId(evento.target.value)} value={gremioId}>
             <option value="todos">Todos los gremios</option>
             {gremios.map((gremio) => <option key={gremio.id} value={gremio.id}>{gremio.nombre}</option>)}
           </select>
         </label>
       </section>
 
-      <div className="flex items-center justify-between text-xs text-slate-600">
+      <div className="formulas-contenedor-flexible-length-formulas-encontradas-ordenadas">
         <span>{formulasFiltradas.length} fórmulas encontradas</span>
         <span>Ordenadas por creación reciente</span>
       </div>
 
       {formulasFiltradas.length > 0 ? (
-        <section className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+        <section className="formulas-cuadricula-map">
           {[...formulasFiltradas]
             .sort((a, b) => new Date(b.fechaCreacion) - new Date(a.fechaCreacion))
             .map((formula) => (

@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { FiArrowLeft, FiCalendar, FiCheck, FiInfo, FiLayers } from "react-icons/fi";
 import { crearCategorias } from "../data/seedData";
@@ -12,13 +12,11 @@ function fechaParaInput(fecha) {
 function NuevaFormulaPage({ usuario, gremios, onCreateFormula }) {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const hoy = useMemo(() => new Date(), []);
-  const fechaMaxima = useMemo(() => {
-    const limite = new Date(hoy);
-    limite.setDate(limite.getDate() + 7);
-    limite.setHours(23, 59, 59, 999);
-    return limite;
-  }, [hoy]);
+  // Se calcula la fecha directamente porque solo necesitamos sumar siete días.
+  const hoy = new Date();
+  const fechaMaxima = new Date();
+  fechaMaxima.setDate(fechaMaxima.getDate() + 7);
+  fechaMaxima.setHours(23, 59, 59, 999);
   const gremiosPermitidos = gremios.filter((gremio) => puedeCrearFormula(gremio, usuario));
   const gremioInicial = searchParams.get("gremio");
   const [error, setError] = useState("");
@@ -64,19 +62,19 @@ function NuevaFormulaPage({ usuario, gremios, onCreateFormula }) {
 
   if (gremiosPermitidos.length === 0) {
     return (
-      <div className="mx-auto max-w-2xl">
-        <Link className="focus-ring inline-flex items-center gap-2 rounded-lg text-xs font-bold text-slate-500 hover:text-white" to="/formulas">
+      <div className="nueva-formula-contenedor-arrow-left-volver-a">
+        <Link className="nueva-formula-enlace-formulas" to="/formulas">
           <FiArrowLeft aria-hidden="true" /> Volver a fórmulas
         </Link>
-        <section className="glass-panel mt-8 rounded-3xl p-8 text-center">
-          <span className="mx-auto grid size-14 place-items-center rounded-2xl bg-amber-300/8 text-amber-200 ring-1 ring-amber-300/15">
+        <section className="nueva-formula-seccion-info-aun-no-puedes">
+          <span className="nueva-formula-insignia-info">
             <FiInfo aria-hidden="true" />
           </span>
-          <h1 className="font-display mt-5 text-2xl font-semibold text-white">Aún no puedes crear fórmulas</h1>
-          <p className="mt-3 text-sm leading-6 text-slate-400">
+          <h1 className="nueva-formula-titulo-principal-aun-no-puedes-crear">Aún no puedes crear fórmulas</h1>
+          <p className="nueva-formula-descripcion-necesitas-ser-gran-maestre">
             Necesitas ser Gran Maestre o Alquimista sénior y mantener al menos 30% de participación.
           </p>
-          <Link className="focus-ring mt-6 inline-flex rounded-xl bg-violet-500 px-5 py-3 text-xs font-extrabold text-white" to="/gremios">
+          <Link className="nueva-formula-enlace-gremios" to="/gremios">
             Revisar mis gremios
           </Link>
         </section>
@@ -85,79 +83,79 @@ function NuevaFormulaPage({ usuario, gremios, onCreateFormula }) {
   }
 
   return (
-    <div className="mx-auto max-w-4xl space-y-7">
-      <Link className="focus-ring inline-flex items-center gap-2 rounded-lg text-xs font-bold text-slate-500 hover:text-white" to="/formulas">
+    <div className="nueva-formula-lista-vertical-arrow-left-volver-a">
+      <Link className="nueva-formula-enlace-volver-formulas" to="/formulas">
         <FiArrowLeft aria-hidden="true" /> Volver a fórmulas
       </Link>
 
       <header>
-        <p className="text-xs font-extrabold tracking-[0.2em] text-cyan-300 uppercase">Nueva propuesta</p>
-        <h1 className="font-display mt-2 text-3xl font-semibold text-white md:text-4xl">Diseña una fórmula base</h1>
-        <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-400">
+        <p className="nueva-formula-descripcion-nueva-propuesta">Nueva propuesta</p>
+        <h1 className="nueva-formula-titulo-principal-disena-una-formula-base">Diseña una fórmula base</h1>
+        <p className="nueva-formula-descripcion-define-el-proposito-y">
           Define el propósito y abre un expediente con las tres categorías oficiales de Potion Lab.
         </p>
       </header>
 
-      <form className="space-y-6" onSubmit={manejarEnvio}>
-        <section className="glass-panel rounded-2xl p-5 sm:p-7">
-          <div className="mb-6 flex items-center gap-3 border-b border-white/8 pb-5">
-            <span className="grid size-10 place-items-center rounded-xl bg-violet-300/10 text-violet-200 ring-1 ring-violet-300/15">
+      <form className="nueva-formula-formulario-layers-datos-de-la" onSubmit={manejarEnvio}>
+        <section className="nueva-formula-seccion-layers-datos-de-la">
+          <div className="nueva-formula-contenedor-flexible-layers-datos-de-la">
+            <span className="nueva-formula-insignia-layers">
               <FiLayers aria-hidden="true" />
             </span>
             <div>
-              <h2 className="text-sm font-bold text-white">Datos de la fórmula</h2>
-              <p className="mt-1 text-xs text-slate-500">Todos los campos son obligatorios.</p>
+              <h2 className="nueva-formula-titulo-seccion-datos-de-la-formula">Datos de la fórmula</h2>
+              <p className="nueva-formula-descripcion-todos-los-campos-son">Todos los campos son obligatorios.</p>
             </div>
           </div>
 
-          <div className="grid gap-5 sm:grid-cols-2">
-            <label className="block sm:col-span-2">
-              <span className="mb-2 block text-xs font-bold text-slate-300">Gremio responsable</span>
-              <select className="focus-ring w-full rounded-xl border border-white/10 bg-[#15182e] px-4 py-3 text-sm text-white" name="gremioId" onChange={manejarCambio} value={formulario.gremioId}>
+          <div className="nueva-formula-cuadricula-gremio-responsable-map-nombre">
+            <label className="nueva-formula-etiqueta-campo-gremio-responsable-map">
+              <span className="nueva-formula-texto-gremio-responsable">Gremio responsable</span>
+              <select className="nueva-formula-selector-gremio-id" name="gremioId" onChange={manejarCambio} value={formulario.gremioId}>
                 {gremiosPermitidos.map((gremio) => <option key={gremio.id} value={gremio.id}>{gremio.nombre}</option>)}
               </select>
             </label>
-            <label className="block sm:col-span-2">
-              <span className="mb-2 flex justify-between text-xs font-bold text-slate-300">
-                Nombre de la poción <small className="font-normal text-slate-600">{formulario.nombrePocion.length}/50</small>
+            <label className="nueva-formula-etiqueta-campo-nombre-de-la-pocion">
+              <span className="nueva-formula-texto-nombre-de-la-pocion">
+                Nombre de la poción <small className="nueva-formula-detalle-length-50">{formulario.nombrePocion.length}/50</small>
               </span>
-              <input className="focus-ring w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none" maxLength="50" name="nombrePocion" onChange={manejarCambio} placeholder="Ej. Elixir de la Aurora" required value={formulario.nombrePocion} />
+              <input className="nueva-formula-campo-nombre-pocion" maxLength="50" name="nombrePocion" onChange={manejarCambio} placeholder="Ej. Elixir de la Aurora" required value={formulario.nombrePocion} />
             </label>
-            <label className="block sm:col-span-2">
-              <span className="mb-2 flex justify-between text-xs font-bold text-slate-300">
-                Efecto deseado <small className="font-normal text-slate-600">{formulario.efectoDeseado.length}/200</small>
+            <label className="nueva-formula-etiqueta-campo-efecto-deseado-length-200">
+              <span className="nueva-formula-texto-efecto-deseado-length-200">
+                Efecto deseado <small className="nueva-formula-detalle-length-200">{formulario.efectoDeseado.length}/200</small>
               </span>
-              <textarea className="focus-ring min-h-28 w-full resize-y rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none" maxLength="200" name="efectoDeseado" onChange={manejarCambio} placeholder="Describe qué debería lograr la poción..." required value={formulario.efectoDeseado} />
+              <textarea className="nueva-formula-area-texto-efecto-deseado" maxLength="200" name="efectoDeseado" onChange={manejarCambio} placeholder="Describe qué debería lograr la poción..." required value={formulario.efectoDeseado} />
             </label>
-            <label className="block">
-              <span className="mb-2 block text-xs font-bold text-slate-300">Dificultad propuesta</span>
-              <select className="focus-ring w-full rounded-xl border border-white/10 bg-[#15182e] px-4 py-3 text-sm text-white" name="dificultad" onChange={manejarCambio} value={formulario.dificultad}>
+            <label className="nueva-formula-etiqueta-campo-dificultad-propuesta-facil">
+              <span className="nueva-formula-texto-dificultad-propuesta">Dificultad propuesta</span>
+              <select className="nueva-formula-selector-dificultad" name="dificultad" onChange={manejarCambio} value={formulario.dificultad}>
                 <option value="1">Fácil · Nivel 1</option>
                 <option value="2">Media · Nivel 2</option>
                 <option value="3">Difícil · Nivel 3</option>
                 <option value="4">Arcana · Nivel 4</option>
               </select>
             </label>
-            <label className="block">
-              <span className="mb-2 flex items-center gap-2 text-xs font-bold text-slate-300"><FiCalendar aria-hidden="true" /> Fecha de cierre</span>
-              <input className="focus-ring w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none [color-scheme:dark]" max={fechaParaInput(fechaMaxima)} min={fechaParaInput(hoy)} name="fechaCierre" onChange={manejarCambio} required type="date" value={formulario.fechaCierre} />
+            <label className="nueva-formula-etiqueta-campo-calendar-fecha-de-cierre">
+              <span className="nueva-formula-texto-calendar-fecha-de-cierre"><FiCalendar aria-hidden="true" /> Fecha de cierre</span>
+              <input className="nueva-formula-campo-fecha-cierre" max={fechaParaInput(fechaMaxima)} min={fechaParaInput(hoy)} name="fechaCierre" onChange={manejarCambio} required type="date" value={formulario.fechaCierre} />
             </label>
           </div>
         </section>
 
-        <section className="glass-panel rounded-2xl p-5 sm:p-7">
-          <div className="mb-5">
-            <h2 className="text-sm font-bold text-white">Categorías oficiales</h2>
-            <p className="mt-1 text-xs leading-5 text-slate-500">Cada fórmula comienza con exactamente dos opciones por categoría.</p>
+        <section className="nueva-formula-seccion-categorias-oficiales-cada-formula">
+          <div className="nueva-formula-contenedor-categorias-oficiales-cada-formula">
+            <h2 className="nueva-formula-titulo-seccion-categorias-oficiales">Categorías oficiales</h2>
+            <p className="nueva-formula-descripcion-cada-formula-comienza-con">Cada fórmula comienza con exactamente dos opciones por categoría.</p>
           </div>
-          <div className="grid gap-3 md:grid-cols-3">
+          <div className="nueva-formula-cuadricula-map">
             {crearCategorias().map((categoria) => (
-              <article className="rounded-xl border border-white/8 bg-white/[0.025] p-4" key={categoria.id}>
-                <h3 className="text-xs font-bold text-slate-200">{categoria.nombre}</h3>
-                <ul className="mt-3 space-y-2">
+              <article className="nueva-formula-tarjeta-nombre-map" key={categoria.id}>
+                <h3 className="nueva-formula-titulo-tarjeta-nombre">{categoria.nombre}</h3>
+                <ul className="nueva-formula-lista-map">
                   {categoria.opciones.map((opcion) => (
-                    <li className="flex items-center gap-2 text-[11px] text-slate-500" key={opcion.id}>
-                      <FiCheck className="text-cyan-300" aria-hidden="true" /> {opcion.nombre}
+                    <li className="nueva-formula-elemento-lista-check-nombre" key={opcion.id}>
+                      <FiCheck className="nueva-formula-icono-check" aria-hidden="true" /> {opcion.nombre}
                     </li>
                   ))}
                 </ul>
@@ -166,11 +164,11 @@ function NuevaFormulaPage({ usuario, gremios, onCreateFormula }) {
           </div>
         </section>
 
-        {error && <p className="rounded-xl border border-rose-300/15 bg-rose-300/8 px-4 py-3 text-sm text-rose-200" role="alert">{error}</p>}
+        {error && <p className="nueva-formula-descripcion-error" role="alert">{error}</p>}
 
-        <div className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
-          <Link className="focus-ring rounded-xl border border-white/10 px-5 py-3 text-center text-xs font-bold text-slate-400 hover:bg-white/5 hover:text-white" to="/formulas">Cancelar</Link>
-          <button className="focus-ring rounded-xl bg-violet-500 px-6 py-3 text-xs font-extrabold text-white shadow-lg shadow-violet-950/30 hover:bg-violet-400" type="submit">Guardar como propuesta</button>
+        <div className="nueva-formula-contenedor-flexible-cancelar-guardar-como-propuesta">
+          <Link className="nueva-formula-enlace-cancelar" to="/formulas">Cancelar</Link>
+          <button className="nueva-formula-boton-guardar-como-propuesta" type="submit">Guardar como propuesta</button>
         </div>
       </form>
     </div>

@@ -13,7 +13,14 @@ import TarjetaEstadistica from "../components/common/TarjetaEstadistica";
 import TarjetaFormula from "../components/formula/TarjetaFormula";
 import TarjetaGremio from "../components/gremio/TarjetaGremio";
 
-function ResumenPage({ usuario, gremios, formulas, votos, usuarios, grimorio }) {
+function ResumenPage({
+  usuario,
+  gremios,
+  formulas,
+  votos,
+  usuarios,
+  grimorio,
+}) {
   const misGremios = gremios.filter((gremio) =>
     gremio.miembros.some((miembro) => miembro.usuarioId === usuario.id),
   );
@@ -28,14 +35,14 @@ function ResumenPage({ usuario, gremios, formulas, votos, usuarios, grimorio }) 
   );
 
   return (
-    <div className="space-y-9">
+    <div className="resumen-lista-vertical-ver-todas-arrow-right">
       <EncabezadoPagina
         etiqueta="Panel principal"
         titulo={`Buenas noches, ${usuario.nombreCompleto.split(" ")[0]}`}
         descripcion="Tu laboratorio está sincronizado. Revisa las fórmulas abiertas y participa en las decisiones de tus gremios."
         acciones={
           <Link
-            className="focus-ring flex items-center gap-2 rounded-xl bg-violet-500 px-4 py-3 text-xs font-extrabold text-white shadow-lg shadow-violet-950/30 transition hover:-translate-y-0.5 hover:bg-violet-400"
+            className="resumen-enlace-formulas-nueva"
             to="/formulas/nueva"
           >
             <FiPlus aria-hidden="true" /> Nueva fórmula
@@ -43,7 +50,10 @@ function ResumenPage({ usuario, gremios, formulas, votos, usuarios, grimorio }) 
         }
       />
 
-      <section aria-label="Indicadores personales" className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <section
+        aria-label="Indicadores personales"
+        className="resumen-cuadricula-indicadores-personales"
+      >
         <TarjetaEstadistica
           detalle="en tu perfil"
           etiqueta="Puntos de alquimia"
@@ -74,26 +84,31 @@ function ResumenPage({ usuario, gremios, formulas, votos, usuarios, grimorio }) 
         />
       </section>
 
-      <div className="grid gap-6 xl:grid-cols-[1.55fr_0.75fr]">
+      <div className="resumen-cuadricula-prioridad-del-laboratorio-formulas">
         <section>
-          <div className="mb-4 flex items-end justify-between gap-4">
+          <div className="resumen-contenedor-flexible-prioridad-del-laboratorio-formulas">
             <div>
-              <p className="text-[10px] font-extrabold tracking-[0.17em] text-cyan-300 uppercase">
+              <p className="resumen-descripcion-prioridad-del-laboratorio">
                 Prioridad del laboratorio
               </p>
-              <h2 className="font-display mt-1 text-2xl font-semibold text-white">
+              <h2 className="resumen-titulo-seccion-formulas-que-requieren-atencion">
                 Fórmulas que requieren atención
               </h2>
             </div>
-            <Link className="focus-ring hidden items-center gap-2 rounded-lg text-xs font-bold text-slate-400 hover:text-white sm:flex" to="/formulas">
+            <Link
+              className="resumen-enlace-formulas"
+              to="/formulas"
+            >
               Ver todas <FiArrowRight aria-hidden="true" />
             </Link>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="resumen-cuadricula-map">
             {formulasActivas.slice(0, 2).map((formula) => (
               <TarjetaFormula
-                creador={usuarios.find((item) => item.id === formula.creadaPorId)}
+                creador={usuarios.find(
+                  (item) => item.id === formula.creadaPorId,
+                )}
                 formula={formula}
                 gremio={gremios.find((item) => item.id === formula.gremioId)}
                 key={formula.id}
@@ -103,60 +118,77 @@ function ResumenPage({ usuario, gremios, formulas, votos, usuarios, grimorio }) 
           </div>
         </section>
 
-        <aside className="glass-panel rounded-2xl p-5 sm:p-6">
-          <div className="flex items-center justify-between">
+        <aside className="resumen-panel-lateral-grimorio-ultimas-destilaciones-book">
+          <div className="resumen-contenedor-flexible-grimorio-ultimas-destilaciones-book">
             <div>
-              <p className="text-[10px] font-extrabold tracking-[0.16em] text-violet-300 uppercase">
+              <p className="resumen-descripcion-grimorio">
                 Grimorio
               </p>
-              <h2 className="font-display mt-1 text-xl font-semibold text-white">
+              <h2 className="resumen-titulo-seccion-ultimas-destilaciones">
                 Últimas destilaciones
               </h2>
             </div>
-            <span className="grid size-10 place-items-center rounded-xl bg-amber-300/8 text-amber-200 ring-1 ring-amber-300/15">
+            <span className="resumen-insignia-book-open">
               <FiBookOpen aria-hidden="true" />
             </span>
           </div>
 
-          <div className="mt-6 space-y-3">
+          <div className="resumen-lista-vertical-map">
             {grimorio.slice(0, 3).map((pocion, indice) => (
-              <article className="rounded-xl border border-white/7 bg-white/[0.025] p-4" key={pocion.id}>
-                <div className="flex items-start gap-3">
-                  <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-violet-300/8 text-[10px] font-extrabold text-violet-200">
+              <article
+                className="resumen-tarjeta-pad-start-nombre-rareza"
+                key={pocion.id}
+              >
+                <div className="resumen-contenedor-flexible-pad-start-nombre-rareza">
+                  <span className="resumen-insignia-pad-start">
                     {String(indice + 1).padStart(2, "0")}
                   </span>
-                  <div className="min-w-0">
-                    <h3 className="line-clamp-2 text-xs leading-5 font-bold text-slate-200">
+                  <div className="resumen-contenedor-nombre-rareza-rareza">
+                    <h3 className="resumen-titulo-tarjeta-nombre">
                       {pocion.nombre}
                     </h3>
-                    <p className="mt-1 text-[10px] text-slate-600">Rareza {pocion.rareza}</p>
+                    <p className="resumen-descripcion-rareza-rareza">
+                      Rareza {pocion.rareza}
+                    </p>
                   </div>
                 </div>
               </article>
             ))}
           </div>
 
-          <Link className="focus-ring mt-5 flex items-center justify-center gap-2 rounded-xl border border-white/8 px-4 py-3 text-xs font-bold text-slate-300 transition hover:bg-white/5 hover:text-white" to="/grimorio">
+          <Link
+            className="resumen-enlace-grimorio"
+            to="/grimorio"
+          >
             Explorar el grimorio <FiArrowRight aria-hidden="true" />
           </Link>
         </aside>
       </div>
 
       <section>
-        <div className="mb-4 flex items-end justify-between">
+        <div className="resumen-contenedor-flexible-comunidad-tus-gremios-explorar">
           <div>
-            <p className="text-[10px] font-extrabold tracking-[0.17em] text-cyan-300 uppercase">
+            <p className="resumen-descripcion-comunidad">
               Comunidad
             </p>
-            <h2 className="font-display mt-1 text-2xl font-semibold text-white">Tus gremios</h2>
+            <h2 className="resumen-titulo-seccion-tus-gremios">
+              Tus gremios
+            </h2>
           </div>
-          <Link className="focus-ring flex items-center gap-2 rounded-lg text-xs font-bold text-slate-400 hover:text-white" to="/gremios">
+          <Link
+            className="resumen-enlace-gremios"
+            to="/gremios"
+          >
             Explorar <FiArrowRight aria-hidden="true" />
           </Link>
         </div>
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        <div className="resumen-cuadricula-mis-gremios">
           {misGremios.slice(0, 3).map((gremio) => (
-            <TarjetaGremio gremio={gremio} key={gremio.id} usuarioId={usuario.id} />
+            <TarjetaGremio
+              gremio={gremio}
+              key={gremio.id}
+              usuarioId={usuario.id}
+            />
           ))}
         </div>
       </section>

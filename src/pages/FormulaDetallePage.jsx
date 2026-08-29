@@ -37,9 +37,9 @@ function FormulaDetallePage({
 
   if (!formula) {
     return (
-      <section className="glass-panel rounded-2xl p-8 text-center">
-        <h1 className="font-display text-2xl text-white">Fórmula no encontrada</h1>
-        <Link className="mt-5 inline-flex text-sm font-bold text-violet-300" to="/formulas">Volver a fórmulas</Link>
+      <section className="formula-detalle-seccion-formula-no-encontrada-volver">
+        <h1 className="formula-detalle-titulo-principal-formula-no-encontrada">Fórmula no encontrada</h1>
+        <Link className="formula-detalle-enlace-formulas" to="/formulas">Volver a fórmulas</Link>
       </section>
     );
   }
@@ -59,99 +59,98 @@ function FormulaDetallePage({
     .sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
 
   return (
-    <div className="space-y-7">
-      <Link className="focus-ring inline-flex items-center gap-2 rounded-lg text-xs font-bold text-slate-500 hover:text-white" to="/formulas">
+    <div className="formula-detalle-lista-vertical-arrow-left-volver-a">
+      <Link className="formula-detalle-enlace-volver-formulas" to="/formulas">
         <FiArrowLeft aria-hidden="true" /> Volver a fórmulas
       </Link>
 
-      <section className="glass-panel overflow-hidden rounded-3xl">
-        <div className="border-b border-white/8 p-6 sm:p-8">
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
-            <div className="max-w-3xl">
-              <div className="flex flex-wrap items-center gap-3">
+      <section className="formula-detalle-seccion-nombre-pocion-efecto-deseado">
+        <div className="formula-detalle-contenedor-nombre-nombre-pocion-efecto">
+          <div className="formula-detalle-contenedor-flexible-nombre-nombre-pocion-efecto">
+            <div className="formula-detalle-informacion-principal-formula">
+              <div className="formula-detalle-contenedor-flexible-nombre">
                 <InsigniaEstado estado={formula.estado} />
-                <Link className="text-xs font-bold text-slate-500 hover:text-violet-200" to={`/gremios/${gremio.id}`}>{gremio.nombre}</Link>
+                <Link className="formula-detalle-enlace-gremios" to={`/gremios/${gremio.id}`}>{gremio.nombre}</Link>
               </div>
-              <h1 className="font-display mt-5 text-3xl font-semibold text-white md:text-4xl">{formula.nombrePocion}</h1>
-              <p className="mt-4 text-sm leading-7 text-slate-400 md:text-base">{formula.efectoDeseado}</p>
+              <h1 className="formula-detalle-titulo-principal-nombre-pocion">{formula.nombrePocion}</h1>
+              <p className="formula-detalle-descripcion-efecto-deseado">{formula.efectoDeseado}</p>
             </div>
 
-            <div className="flex flex-wrap gap-3">
+            <div className="formula-detalle-contenedor-flexible">
               {formula.estado === "proposal" && puedeGestionar && (
-                <button className="focus-ring flex items-center gap-2 rounded-xl bg-cyan-400 px-4 py-3 text-xs font-extrabold text-slate-950 hover:bg-cyan-300" onClick={() => onTransition(formula.id, "voting")} type="button">
+                <button className="formula-detalle-boton-zap-abrir-votacion" onClick={() => onTransition(formula.id, "voting")} type="button">
                   <FiZap aria-hidden="true" /> Abrir votación
                 </button>
               )}
               {formula.estado === "voting" && puedeGestionar && (
-                <button className="focus-ring flex items-center gap-2 rounded-xl border border-amber-300/25 bg-amber-300/10 px-4 py-3 text-xs font-extrabold text-amber-100 hover:bg-amber-300/15" onClick={() => onTransition(formula.id, "closed")} type="button">
+                <button className="formula-detalle-boton-lock-cerrar-votacion" onClick={() => onTransition(formula.id, "closed")} type="button">
                   <FiLock aria-hidden="true" /> Cerrar votación
                 </button>
               )}
               {formula.estado === "closed" && puedeGestionar && (
-                <button className="focus-ring flex items-center gap-2 rounded-xl bg-violet-500 px-4 py-3 text-xs font-extrabold text-white hover:bg-violet-400" onClick={() => onDistill(formula.id)} type="button">
+                <button className="formula-detalle-boton-destilar-resultado" onClick={() => onDistill(formula.id)} type="button">
                   <GiPotionBall aria-hidden="true" /> Destilar resultado
                 </button>
               )}
             </div>
           </div>
 
-          <dl className="mt-7 grid gap-3 border-t border-white/8 pt-6 sm:grid-cols-2 lg:grid-cols-4">
-            <div className="flex items-center gap-3">
-              <FiUser className="text-slate-600" aria-hidden="true" />
-              <div><dt className="text-[10px] text-slate-600">Creada por</dt><dd className="mt-1 text-xs font-bold text-slate-300">{creador?.nombreCompleto}</dd></div>
+          <dl className="formula-detalle-lista-datos-user-creada-por-activity">
+            <div className="formula-detalle-contenedor-flexible-user-creada-por">
+              <FiUser className="formula-detalle-icono-user" aria-hidden="true" />
+              <div><dt className="formula-detalle-nombre-dato-creada-por">Creada por</dt><dd className="formula-detalle-valor-dato">{creador?.nombreCompleto}</dd></div>
             </div>
-            <div className="flex items-center gap-3">
-              <FiActivity className="text-slate-600" aria-hidden="true" />
-              <div><dt className="text-[10px] text-slate-600">Dificultad</dt><dd className="mt-1 text-xs font-bold text-slate-300">Nivel {formula.dificultad} de 4</dd></div>
+            <div className="formula-detalle-contenedor-flexible-activity-dificultad-nivel-dificultad">
+              <FiActivity className="formula-detalle-icono-activity" aria-hidden="true" />
+              <div><dt className="formula-detalle-nombre-dato-dificultad">Dificultad</dt><dd className="formula-detalle-valor-dato-nivel-dificultad-de-4">Nivel {formula.dificultad} de 4</dd></div>
             </div>
-            <div className="flex items-center gap-3">
-              <FiCalendar className="text-slate-600" aria-hidden="true" />
-              <div><dt className="text-[10px] text-slate-600">Fecha de cierre</dt><dd className="mt-1 text-xs font-bold text-slate-300">{formatearFecha(formula.fechaCierre, true)}</dd></div>
+            <div className="formula-detalle-contenedor-flexible-calendar-fecha-de-cierre">
+              <FiCalendar className="formula-detalle-icono-calendar" aria-hidden="true" />
+              <div><dt className="formula-detalle-nombre-dato-fecha-de-cierre">Fecha de cierre</dt><dd className="formula-detalle-valor-dato-fecha">{formatearFecha(formula.fechaCierre, true)}</dd></div>
             </div>
-            <div className="flex items-center gap-3">
-              <FiClock className="text-slate-600" aria-hidden="true" />
-              <div><dt className="text-[10px] text-slate-600">Disponibilidad</dt><dd className="mt-1 text-xs font-bold text-slate-300">{formula.estado === "voting" ? tiempoRestante(formula.fechaCierre) : "Etapa completada"}</dd></div>
+            <div className="formula-detalle-contenedor-flexible-clock-disponibilidad-tiempo-restante">
+              <FiClock className="formula-detalle-icono-clock" aria-hidden="true" />
+              <div><dt className="formula-detalle-nombre-dato-disponibilidad">Disponibilidad</dt><dd className="formula-detalle-valor-dato-tiempo-restante">{formula.estado === "voting" ? tiempoRestante(formula.fechaCierre) : "Etapa completada"}</dd></div>
             </div>
           </dl>
         </div>
 
-        <div className="bg-black/10 px-6 py-6 sm:px-8">
+        <div className="formula-detalle-panel">
           <PasosEstadoFormula estado={formula.estado} />
         </div>
       </section>
 
       {formula.estado === "distilled" && pocion ? (
-        <section className="relative overflow-hidden rounded-3xl border border-violet-300/20 bg-gradient-to-br from-violet-500/14 via-[#151832] to-cyan-300/7 p-6 sm:p-8">
-          <div className="absolute -top-16 -right-16 size-52 rounded-full bg-violet-400/10 blur-3xl" aria-hidden="true" />
-          <div className="relative flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-            <div className="max-w-3xl">
-              <p className="flex items-center gap-2 text-[10px] font-extrabold tracking-[0.18em] text-amber-200 uppercase"><FiCheckCircle aria-hidden="true" /> Resultado destilado</p>
-              <h2 className="font-display mt-3 text-2xl font-semibold text-white md:text-3xl">{pocion.nombre}</h2>
-              <p className="mt-3 text-sm leading-6 text-slate-400">{pocion.efecto}</p>
+        <section className="formula-detalle-seccion-check-circle-resultado-destilado">
+          <div className="formula-detalle-contenedor-flexible-check-circle-resultado-destilado">
+            <div className="formula-detalle-contenedor-check-circle-resultado-destilado">
+              <p className="formula-detalle-descripcion-check-circle-resultado-destilado"><FiCheckCircle aria-hidden="true" /> Resultado destilado</p>
+              <h2 className="formula-detalle-titulo-seccion-nombre">{pocion.nombre}</h2>
+              <p className="formula-detalle-descripcion-efecto">{pocion.efecto}</p>
             </div>
-            <div className="grid shrink-0 grid-cols-2 gap-3">
-              <div className="rounded-2xl bg-black/15 px-5 py-4 text-center ring-1 ring-white/8"><span className="text-[10px] text-slate-500">Dificultad real</span><strong className="mt-1 block text-2xl text-cyan-200">{pocion.dificultadReal}</strong></div>
-              <div className="rounded-2xl bg-black/15 px-5 py-4 text-center ring-1 ring-white/8"><span className="text-[10px] text-slate-500">Rareza</span><strong className="mt-1 block text-2xl text-amber-200">{pocion.rareza}</strong></div>
+            <div className="formula-detalle-cuadricula-dificultad-real-dificultad-real">
+              <div className="formula-detalle-panel-dificultad-real-dificultad-real"><span className="formula-detalle-texto-dificultad-real">Dificultad real</span><strong className="formula-detalle-dato-destacado-dificultad-real">{pocion.dificultadReal}</strong></div>
+              <div className="formula-detalle-panel-rareza-rareza"><span className="formula-detalle-texto-rareza">Rareza</span><strong className="formula-detalle-dato-destacado-rareza">{pocion.rareza}</strong></div>
             </div>
           </div>
-          <Link className="focus-ring relative mt-6 inline-flex items-center gap-2 rounded-xl bg-white/8 px-4 py-3 text-xs font-bold text-white hover:bg-white/12" to="/grimorio"><FiBookOpen aria-hidden="true" /> Abrir en el grimorio</Link>
+          <Link className="formula-detalle-enlace-grimorio" to="/grimorio"><FiBookOpen aria-hidden="true" /> Abrir en el grimorio</Link>
         </section>
       ) : (
-        <div className="grid gap-6 xl:grid-cols-[1.55fr_0.65fr]">
-          <section className="glass-panel rounded-2xl p-5 sm:p-7">
-            <div className="flex flex-col gap-4 border-b border-white/8 pb-5 sm:flex-row sm:items-center sm:justify-between">
+        <div className="formula-detalle-cuadricula-mesa-de-votacion-decide">
+          <section className="formula-detalle-seccion-mesa-de-votacion-decide">
+            <div className="formula-detalle-contenedor-flexible-mesa-de-votacion-decide">
               <div>
-                <p className="text-[10px] font-extrabold tracking-[0.16em] text-cyan-300 uppercase">Mesa de votación</p>
-                <h2 className="font-display mt-1 text-xl font-semibold text-white">Decide la composición</h2>
+                <p className="formula-detalle-descripcion-mesa-de-votacion">Mesa de votación</p>
+                <h2 className="formula-detalle-titulo-seccion-decide-la-composicion">Decide la composición</h2>
               </div>
-              <span className="w-fit rounded-full bg-white/5 px-3 py-1.5 text-[10px] font-bold text-slate-400 ring-1 ring-white/8">{Object.keys(votosFormula).length}/3 categorías completadas</span>
+              <span className="formula-detalle-texto-length-3-categorias-completadas">{Object.keys(votosFormula).length}/3 categorías completadas</span>
             </div>
 
             {!puedeVotar && formula.estado !== "voting" && (
-              <p className="mt-5 rounded-xl border border-amber-300/15 bg-amber-300/6 px-4 py-3 text-xs leading-5 text-amber-100">La votación no está abierta. Los resultados actuales se muestran en modo de consulta.</p>
+              <p className="formula-detalle-descripcion-la-votacion-no-esta">La votación no está abierta. Los resultados actuales se muestran en modo de consulta.</p>
             )}
 
-            <div className="mt-5 space-y-4">
+            <div className="formula-detalle-lista-vertical-map">
               {formula.categorias.map((categoria) => (
                 <CategoriaVotacion
                   categoria={categoria}
@@ -168,33 +167,33 @@ function FormulaDetallePage({
             </div>
           </section>
 
-          <aside className="space-y-5">
-            <section className="glass-panel rounded-2xl p-5">
-              <p className="text-[10px] font-extrabold tracking-[0.16em] text-violet-300 uppercase">Tu influencia</p>
-              <h2 className="font-display mt-1 text-lg font-semibold text-white">{rol}</h2>
-              <p className="mt-3 text-xs leading-5 text-slate-500">Especialidad: <strong className="text-slate-300">{usuario.especialidad}</strong></p>
+          <aside className="formula-detalle-panel-lateral-tu-influencia-rol-especialidad">
+            <section className="formula-detalle-seccion-tu-influencia-rol-especialidad">
+              <p className="formula-detalle-descripcion-tu-influencia">Tu influencia</p>
+              <h2 className="formula-detalle-titulo-seccion-rol">{rol}</h2>
+              <p className="formula-detalle-descripcion-especialidad-especialidad">Especialidad: <strong className="formula-detalle-dato-destacado-especialidad">{usuario.especialidad}</strong></p>
               {catadorOficial && (
-                <div className="mt-4 rounded-xl border border-cyan-300/15 bg-cyan-300/6 p-4">
-                  <p className="flex items-center gap-2 text-xs font-bold text-cyan-200"><FiShield aria-hidden="true" /> Catador Oficial</p>
-                  <p className="mt-2 text-[11px] leading-5 text-slate-400">Tu voto vale doble y tienes un veto disponible por fórmula.</p>
+                <div className="formula-detalle-panel-shield-catador-oficial-tu">
+                  <p className="formula-detalle-descripcion-shield-catador-oficial"><FiShield aria-hidden="true" /> Catador Oficial</p>
+                  <p className="formula-detalle-descripcion-tu-voto-vale-doble">Tu voto vale doble y tienes un veto disponible por fórmula.</p>
                 </div>
               )}
               {formula.veto && (
-                <p className="mt-4 rounded-xl bg-rose-300/7 px-3 py-3 text-[11px] leading-5 text-rose-200">El veto de esta fórmula ya fue utilizado.</p>
+                <p className="formula-detalle-descripcion-el-veto-de-esta">El veto de esta fórmula ya fue utilizado.</p>
               )}
             </section>
 
-            <section className="glass-panel rounded-2xl p-5">
-              <p className="text-[10px] font-extrabold tracking-[0.16em] text-slate-500 uppercase">Registro de auditoría</p>
-              <div className="mt-5 space-y-5">
+            <section className="formula-detalle-seccion-registro-de-auditoria-map">
+              <p className="formula-detalle-descripcion-registro-de-auditoria">Registro de auditoría</p>
+              <div className="formula-detalle-lista-auditoria">
                 {eventos.length > 0 ? eventos.map((evento) => (
-                  <article className="relative border-l border-white/10 pl-4" key={evento.id}>
-                    <span className="absolute top-1 -left-1 size-2 rounded-full bg-violet-300 ring-4 ring-[#11142b]" />
-                    <h3 className="text-xs font-bold text-slate-300">{evento.titulo}</h3>
-                    <p className="mt-1 text-[10px] leading-5 text-slate-500">{evento.detalle}</p>
-                    <time className="mt-2 block text-[9px] text-slate-700">{formatearFecha(evento.fecha, true)}</time>
+                  <article className="formula-detalle-tarjeta-titulo-detalle-fecha" key={evento.id}>
+                    <span className="formula-detalle-indicador" />
+                    <h3 className="formula-detalle-titulo-tarjeta">{evento.titulo}</h3>
+                    <p className="formula-detalle-descripcion-detalle">{evento.detalle}</p>
+                    <time className="formula-detalle-elemento-time-fecha">{formatearFecha(evento.fecha, true)}</time>
                   </article>
-                )) : <p className="text-xs text-slate-600">Aún no hay eventos registrados.</p>}
+                )) : <p className="formula-detalle-descripcion-aun-no-hay-eventos">Aún no hay eventos registrados.</p>}
               </div>
             </section>
           </aside>

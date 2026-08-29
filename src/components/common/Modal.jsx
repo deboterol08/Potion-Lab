@@ -17,7 +17,7 @@ function Modal({ abierto, titulo, descripcion, onCerrar, children }) {
 
   return (
     <div
-      className="fixed inset-0 z-50 grid place-items-end bg-slate-950/80 p-0 backdrop-blur-sm sm:place-items-center sm:p-6"
+      className="modal-cuadricula-titulo-x-children"
       role="presentation"
       onMouseDown={(evento) => {
         if (evento.target === evento.currentTarget) onCerrar();
@@ -27,30 +27,30 @@ function Modal({ abierto, titulo, descripcion, onCerrar, children }) {
         aria-describedby={descripcion ? "modal-description" : undefined}
         aria-labelledby="modal-title"
         aria-modal="true"
-        className="glass-panel max-h-[92vh] w-full max-w-xl overflow-y-auto rounded-t-3xl p-6 sm:rounded-3xl sm:p-8"
+        className="modal-seccion-titulo-x-children"
         role="dialog"
       >
-        <div className="flex items-start justify-between gap-4">
+        <div className="modal-contenedor-flexible-titulo-x">
           <div>
-            <h2 id="modal-title" className="font-display text-2xl font-semibold text-white">
+            <h2 id="modal-title" className="modal-titulo-seccion">
               {titulo}
             </h2>
             {descripcion && (
-              <p id="modal-description" className="mt-2 text-sm leading-6 text-slate-400">
+              <p id="modal-description" className="modal-descripcion">
                 {descripcion}
               </p>
             )}
           </div>
           <button
             aria-label="Cerrar ventana"
-            className="focus-ring grid size-10 shrink-0 place-items-center rounded-xl bg-white/5 text-slate-300 transition hover:bg-white/10 hover:text-white"
+            className="modal-boton-cerrar-ventana"
             onClick={onCerrar}
             type="button"
           >
             <FiX aria-hidden="true" />
           </button>
         </div>
-        <div className="mt-7">{children}</div>
+        <div className="modal-contenedor-children">{children}</div>
       </section>
     </div>
   );

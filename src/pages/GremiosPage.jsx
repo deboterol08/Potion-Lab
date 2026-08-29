@@ -66,11 +66,11 @@ function GremiosPage({ usuario, gremios, onCreateGuild, onJoinGuild }) {
   }
 
   return (
-    <div className="space-y-8">
+    <div className="gremios-lista-vertical-buscar-gremios-search-mostrar">
       <EncabezadoPagina
         acciones={
           <button
-            className="focus-ring flex items-center gap-2 rounded-xl bg-violet-500 px-4 py-3 text-xs font-extrabold text-white transition hover:-translate-y-0.5 hover:bg-violet-400"
+            className="gremios-boton-plus-crear-gremio"
             onClick={() => setModalCrear(true)}
             type="button"
           >
@@ -82,12 +82,12 @@ function GremiosPage({ usuario, gremios, onCreateGuild, onJoinGuild }) {
         titulo="Gremios"
       />
 
-      <section className="glass-panel flex flex-col gap-3 rounded-2xl p-3 sm:flex-row sm:items-center">
-        <label className="relative flex-1">
-          <span className="sr-only">Buscar gremios</span>
-          <FiSearch className="absolute top-1/2 left-4 -translate-y-1/2 text-slate-600" aria-hidden="true" />
+      <section className="gremios-seccion-buscar-gremios-search-mostrar">
+        <label className="gremios-etiqueta-campo-buscar-gremios-search">
+          <span className="gremios-texto-buscar-gremios">Buscar gremios</span>
+          <FiSearch className="gremios-icono-search" aria-hidden="true" />
           <input
-            className="focus-ring w-full rounded-xl border border-white/8 bg-black/15 py-3 pr-4 pl-11 text-sm text-white outline-none placeholder:text-slate-600"
+            className="gremios-campo-buscar-por-nombre-o"
             onChange={(evento) => setBusqueda(evento.target.value)}
             placeholder="Buscar por nombre o lema..."
             value={busqueda}
@@ -95,10 +95,10 @@ function GremiosPage({ usuario, gremios, onCreateGuild, onJoinGuild }) {
         </label>
         <button
           aria-pressed={soloMios}
-          className={`focus-ring rounded-xl px-4 py-3 text-xs font-bold transition ${
+          className={`gremios-boton-filtro ${
             soloMios
-              ? "bg-cyan-300/12 text-cyan-200 ring-1 ring-cyan-300/20"
-              : "bg-white/[0.035] text-slate-400 hover:text-white"
+              ? "gremios-boton-filtro-activo"
+              : "gremios-boton-filtro-inactivo"
           }`}
           onClick={() => setSoloMios((valor) => !valor)}
           type="button"
@@ -108,7 +108,7 @@ function GremiosPage({ usuario, gremios, onCreateGuild, onJoinGuild }) {
       </section>
 
       {gremiosFiltrados.length > 0 ? (
-        <section className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+        <section className="gremios-cuadricula-map">
           {gremiosFiltrados.map((gremio) => (
             <TarjetaGremio
               gremio={gremio}
@@ -135,42 +135,42 @@ function GremiosPage({ usuario, gremios, onCreateGuild, onJoinGuild }) {
         }}
         titulo="Fundar un gremio"
       >
-        <form className="space-y-4" onSubmit={manejarCrear}>
-          <label className="block">
-            <span className="mb-2 block text-xs font-bold text-slate-300">Nombre del gremio</span>
+        <form className="gremios-formulario-nombre-del-gremio-lema" onSubmit={manejarCrear}>
+          <label className="gremios-etiqueta-campo-nombre-del-gremio">
+            <span className="gremios-texto-nombre-del-gremio">Nombre del gremio</span>
             <input
-              className="focus-ring w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none"
+              className="gremios-campo"
               maxLength="50"
               onChange={(evento) => setFormulario((anterior) => ({ ...anterior, nombre: evento.target.value }))}
               required
               value={formulario.nombre}
             />
           </label>
-          <label className="block">
-            <span className="mb-2 block text-xs font-bold text-slate-300">Lema</span>
+          <label className="gremios-etiqueta-campo-lema">
+            <span className="gremios-texto-lema">Lema</span>
             <input
-              className="focus-ring w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none"
+              className="gremios-campo-lema"
               maxLength="90"
               onChange={(evento) => setFormulario((anterior) => ({ ...anterior, lema: evento.target.value }))}
               required
               value={formulario.lema}
             />
           </label>
-          <label className="block">
-            <span className="mb-2 block text-xs font-bold text-slate-300">Descripción</span>
+          <label className="gremios-etiqueta-campo-descripcion">
+            <span className="gremios-texto-descripcion">Descripción</span>
             <textarea
-              className="focus-ring min-h-24 w-full resize-y rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none"
+              className="gremios-area-texto"
               maxLength="180"
               onChange={(evento) => setFormulario((anterior) => ({ ...anterior, descripcion: evento.target.value }))}
               required
               value={formulario.descripcion}
             />
           </label>
-          <div className="grid gap-4 sm:grid-cols-2">
-            <label className="block">
-              <span className="mb-2 block text-xs font-bold text-slate-300">Visibilidad</span>
+          <div className="gremios-cuadricula-visibilidad-publico-privado-url">
+            <label className="gremios-etiqueta-campo-visibilidad-publico-privado">
+              <span className="gremios-texto-visibilidad">Visibilidad</span>
               <select
-                className="focus-ring w-full rounded-xl border border-white/10 bg-[#15182e] px-4 py-3 text-sm text-white"
+                className="gremios-selector-publico-privado"
                 onChange={(evento) => setFormulario((anterior) => ({ ...anterior, tipo: evento.target.value }))}
                 value={formulario.tipo}
               >
@@ -178,10 +178,10 @@ function GremiosPage({ usuario, gremios, onCreateGuild, onJoinGuild }) {
                 <option value="privado">Privado</option>
               </select>
             </label>
-            <label className="block">
-              <span className="mb-2 block text-xs font-bold text-slate-300">URL del emblema</span>
+            <label className="gremios-etiqueta-campo-url-del-emblema">
+              <span className="gremios-texto-url-del-emblema">URL del emblema</span>
               <input
-                className="focus-ring w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none"
+                className="gremios-campo-opcional"
                 onChange={(evento) => setFormulario((anterior) => ({ ...anterior, emblemaUrl: evento.target.value }))}
                 placeholder="Opcional"
                 type="url"
@@ -189,8 +189,8 @@ function GremiosPage({ usuario, gremios, onCreateGuild, onJoinGuild }) {
               />
             </label>
           </div>
-          {error && <p className="rounded-xl bg-rose-300/8 px-4 py-3 text-xs text-rose-200" role="alert">{error}</p>}
-          <button className="focus-ring w-full rounded-xl bg-violet-500 px-5 py-3.5 text-sm font-extrabold text-white hover:bg-violet-400" type="submit">
+          {error && <p className="gremios-descripcion-error" role="alert">{error}</p>}
+          <button className="gremios-boton-crear-gremio" type="submit">
             Crear gremio
           </button>
         </form>
@@ -202,14 +202,14 @@ function GremiosPage({ usuario, gremios, onCreateGuild, onJoinGuild }) {
         onCerrar={() => setGremioParaUnirse(null)}
         titulo="Unirse a gremio privado"
       >
-        <form className="space-y-4" onSubmit={manejarUnion}>
-          <label className="block">
-            <span className="mb-2 flex items-center gap-2 text-xs font-bold text-slate-300">
+        <form className="gremios-formulario-lock-codigo-de-invitacion" onSubmit={manejarUnion}>
+          <label className="gremios-etiqueta-campo-lock-codigo-de-invitacion">
+            <span className="gremios-texto-lock-codigo-de-invitacion">
               <FiLock aria-hidden="true" /> Código de invitación
             </span>
             <input
               autoFocus
-              className="focus-ring w-full rounded-xl border border-white/10 bg-white/5 px-4 py-4 text-center font-mono text-lg font-bold tracking-[0.35em] text-white uppercase outline-none"
+              className="gremios-campo-codigo-invitacion"
               maxLength="6"
               onChange={(evento) => {
                 setCodigo(evento.target.value.toUpperCase());
@@ -219,8 +219,8 @@ function GremiosPage({ usuario, gremios, onCreateGuild, onJoinGuild }) {
               value={codigo}
             />
           </label>
-          {error && <p className="rounded-xl bg-rose-300/8 px-4 py-3 text-xs text-rose-200" role="alert">{error}</p>}
-          <button className="focus-ring w-full rounded-xl bg-violet-500 px-5 py-3.5 text-sm font-extrabold text-white hover:bg-violet-400" type="submit">
+          {error && <p className="gremios-error-union" role="alert">{error}</p>}
+          <button className="gremios-boton-validar-y-unirme" type="submit">
             Validar y unirme
           </button>
         </form>

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
-import Acceso from "./components/auth/Acceso";
+import Acceso from "./components/authentication/Acceso";
 import Aviso from "./components/common/Aviso";
 import LayoutPrincipal from "./components/layout/LayoutPrincipal";
+import UsuarioContext from "./context/UsuarioContext";
 import {
   AUDITORIA_INICIAL,
   CUENTAS_DEMO,
@@ -55,11 +56,15 @@ function App() {
 
     if (vencidas.length === 0) return;
 
-    const idsVencidas = new Set(vencidas.map((formula) => formula.id));
+    // Recorremos las fórmulas y comparamos sus ids. Para pocos datos mock,
+    // esta forma es más fácil de leer que crear otra estructura de datos.
     setFormulas((anteriores) =>
-      anteriores.map((formula) =>
-        idsVencidas.has(formula.id) ? { ...formula, estado: "closed" } : formula,
-      ),
+      anteriores.map((formula) => {
+        const estaVencida = vencidas.some(
+          (vencida) => vencida.id === formula.id,
+        );
+        return estaVencida ? { ...formula, estado: "closed" } : formula;
+      }),
     );
     setAuditoria((anterior) => {
       const nuevos = vencidas
@@ -456,9 +461,9 @@ function App() {
   }
 
   return (
-    <>
+    <UsuarioContext.Provider value={usuarioActivo}>
       <Routes>
-        <Route element={<LayoutPrincipal onLogout={cerrarSesion} usuario={usuarioActivo} />}>
+        <Route element={<LayoutPrincipal onLogout={cerrarSesion} />}>
           <Route
             index
             element={
@@ -543,7 +548,7 @@ function App() {
         </Route>
       </Routes>
       <Aviso mensaje={aviso} onCerrar={() => setAviso("")} />
-    </>
+    </UsuarioContext.Provider>
   );
 }
 

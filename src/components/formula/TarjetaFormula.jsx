@@ -5,33 +5,33 @@ import InsigniaEstado from "../common/InsigniaEstado";
 
 function TarjetaFormula({ formula, gremio, creador, votosCompletados = 0 }) {
   return (
-    <article className="glass-panel group flex h-full flex-col rounded-2xl p-5 transition duration-300 hover:-translate-y-1 hover:border-violet-300/20">
-      <div className="flex items-start justify-between gap-3">
+    <article className="tarjeta-formula-tarjeta-layers-nivel-dificultad-nombre">
+      <div className="tarjeta-formula-contenedor-flexible-layers-nivel-dificultad">
         <InsigniaEstado estado={formula.estado} />
-        <span className="flex items-center gap-1 text-[10px] font-bold text-slate-600">
+        <span className="tarjeta-formula-texto-layers-nivel-dificultad">
           <FiLayers aria-hidden="true" /> Nivel {formula.dificultad}
         </span>
       </div>
 
-      <div className="mt-5 flex-1">
-        <p className="text-[10px] font-extrabold tracking-[0.16em] text-violet-300/75 uppercase">
+      <div className="tarjeta-formula-contenedor-flexible-nombre-pocion-efecto-deseado">
+        <p className="tarjeta-formula-descripcion">
           {gremio?.nombre ?? "Gremio desconocido"}
         </p>
-        <h2 className="font-display mt-2 text-xl font-semibold text-white">
+        <h2 className="tarjeta-formula-titulo-seccion-nombre-pocion">
           {formula.nombrePocion}
         </h2>
-        <p className="mt-3 line-clamp-2 text-sm leading-6 text-slate-400">
+        <p className="tarjeta-formula-descripcion-efecto-deseado">
           {formula.efectoDeseado}
         </p>
       </div>
 
-      <div className="mt-6 grid gap-2 border-y border-white/8 py-4 text-xs text-slate-500">
-        <span className="flex items-center gap-2">
-          <FiUser aria-hidden="true" className="text-slate-600" />
+      <div className="tarjeta-formula-cuadricula-user-calendar-tiempo-restante">
+        <span className="tarjeta-formula-texto-user">
+          <FiUser aria-hidden="true" className="tarjeta-formula-icono-user" />
           {creador?.nombreCompleto ?? "Alquimista desconocido"}
         </span>
-        <span className="flex items-center gap-2">
-          <FiCalendar aria-hidden="true" className="text-slate-600" />
+        <span className="tarjeta-formula-texto-calendar-tiempo-restante">
+          <FiCalendar aria-hidden="true" className="tarjeta-formula-icono-calendar" />
           {formula.estado === "voting"
             ? tiempoRestante(formula.fechaCierre)
             : formatearFecha(formula.fechaCierre)}
@@ -39,14 +39,14 @@ function TarjetaFormula({ formula, gremio, creador, votosCompletados = 0 }) {
       </div>
 
       {formula.estado === "voting" && (
-        <div className="mt-4">
-          <div className="mb-2 flex justify-between text-[10px] font-bold text-slate-500">
+        <div className="tarjeta-formula-contenedor-tu-participacion-votos-completados">
+          <div className="tarjeta-formula-contenedor-flexible-tu-participacion-votos-completados">
             <span>Tu participación</span>
             <span>{votosCompletados}/3</span>
           </div>
-          <div className="h-1.5 overflow-hidden rounded-full bg-white/5">
+          <div className="tarjeta-formula-barra-progreso">
             <span
-              className="block h-full rounded-full bg-gradient-to-r from-violet-400 to-cyan-300 transition-all"
+              className="tarjeta-formula-relleno-progreso"
               style={{ width: `${(votosCompletados / 3) * 100}%` }}
             />
           </div>
@@ -54,11 +54,11 @@ function TarjetaFormula({ formula, gremio, creador, votosCompletados = 0 }) {
       )}
 
       <Link
-        className="focus-ring mt-5 flex items-center justify-between rounded-xl bg-white/[0.035] px-4 py-3 text-xs font-bold text-slate-300 transition group-hover:bg-violet-400/10 group-hover:text-violet-100"
+        className="tarjeta-formula-enlace-formulas"
         to={`/formulas/${formula.id}`}
       >
         {formula.estado === "voting" ? "Abrir mesa de votación" : "Ver expediente"}
-        <FiArrowUpRight aria-hidden="true" className="text-base" />
+        <FiArrowUpRight aria-hidden="true" className="tarjeta-formula-icono-arrow-up-right" />
       </Link>
     </article>
   );
