@@ -48,7 +48,7 @@
   padding-left: 1rem;
   padding-right: 1rem;
   padding-top: 2rem;
-  padding-bottom: 7rem;
+  padding-bottom: 3rem;
   margin-left: auto;
   margin-right: auto;
 }
@@ -130,21 +130,6 @@
   display: block;
 }
 
-.navegacion-movil-enlace-activo {
-  background-color: #8d54ff;
-  color: #fff;
-}
-
-.navegacion-movil-enlace-opcion {
-  align-items: center;
-  gap: .25rem;
-  border-radius: .5rem;
-  padding: 0.5rem;
-  font-size: .75rem;
-  flex-direction: column;
-  display: flex;
-}
-
 .barra-superior-enlace-potion-lab {
   align-items: center;
   gap: 0.75rem;
@@ -157,15 +142,6 @@
   outline: 2px solid #55d9e8;
 }
 
-.navegacion-movil-enlace-inactivo {
-  color: #90a1b9;
-}
-
-.barra-superior-icono-chevron-down {
-  color: #45556c;
-  display: none;
-}
-
 .barra-superior-insignia-iniciales {
   width: 2.5rem;
   height: 2.5rem;
@@ -176,29 +152,6 @@
   color: #fff;
   place-items: center;
   display: grid;
-}
-
-.navegacion-movil-icono-decorativo {
-  font-size: 1.125rem;
-}
-
-.navegacion-movil-navegacion-movil {
-  right: 0.75rem;
-  bottom: 0.75rem;
-  left: 0.75rem;
-  z-index: 40;
-  max-width: 32rem;
-  border-radius: .75rem;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #ffffff1a;
-  grid-template-columns: repeat(5,minmax(0,1fr));
-  margin-left: auto;
-  margin-right: auto;
-  display: grid;
-  position: fixed;
-  background-color: #0f172b;
-  padding: 0.5rem;
 }
 
 .barra-lateral-navegacion-principal {
@@ -241,26 +194,6 @@
   display: flex;
 }
 
-.barra-superior-boton-notificaciones {
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: .75rem;
-  color: #90a1b9;
-  place-items: center;
-  display: grid;
-  position: relative;
-}
-
-.barra-superior-boton-notificaciones:focus {
-  outline-offset: 2px;
-  outline: 2px solid #55d9e8;
-}
-
-.barra-superior-boton-notificaciones:hover {
-  background-color: #ffffff0d;
-  color: #fff;
-}
-
 .barra-superior-detalle-especialidad {
   font-size: .75rem;
   color: #62748e;
@@ -287,16 +220,6 @@
   letter-spacing: .05em;
   color: #62748e;
   text-transform: uppercase;
-}
-
-.barra-superior-indicador-notificacion {
-  top: 0.5rem;
-  right: 0.5rem;
-  width: 0.5rem;
-  height: 0.5rem;
-  background-color: #ffd236;
-  border-radius: 9999px;
-  position: absolute;
 }
 
 .barra-lateral-dato-destacado-potion-lab {
@@ -460,10 +383,6 @@
     display: none;
   }
 
-  .navegacion-movil-navegacion-movil {
-    display: none;
-  }
-
   .layout-principal-contenido-con-barra {
     padding-left: 17rem;
   }
@@ -487,10 +406,6 @@
   .layout-principal-pantalla {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
-  }
-
-  .barra-superior-icono-chevron-down {
-    display: block;
   }
 
   .barra-superior-texto-nombre-completo-especialidad {

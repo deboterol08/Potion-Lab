@@ -1,17 +1,4 @@
 
-.pasos-formula-etapa-activa {
-  border-color: #53eafd80;
-  background-color: #53eafd33;
-  color: #a2f4fd;
-}
-
-.pasos-formula-nombre-etapa {
-  margin-top: 0.5rem;
-  font-size: .75rem;
-  font-weight: 700;
-  display: block;
-}
-
 .tarjeta-formula-icono-user {
   color: #45556c;
 }
@@ -22,46 +9,12 @@
   display: flex;
 }
 
-.pasos-formula-nombre-activo {
-  color: #e2e8f0;
-}
-
 .tarjeta-formula-descripcion {
   font-size: .75rem;
   font-weight: 700;
   letter-spacing: .05em;
   color: #c4b4ff;
   text-transform: uppercase;
-}
-
-.pasos-formula-etapa-pendiente {
-  border-color: #ffffff1a;
-  background-color: #ffffff08;
-  color: #45556c;
-}
-
-.pasos-formula-indicador-etapa {
-  width: 2rem;
-  height: 2rem;
-  border-style: solid;
-  font-size: .75rem;
-  font-weight: 700;
-  border-width: 1px;
-  border-radius: 9999px;
-  place-items: center;
-  margin-left: auto;
-  margin-right: auto;
-  display: grid;
-}
-
-.pasos-formula-nombre-inactivo {
-  color: #45556c;
-}
-
-.pasos-formula-etapa-completada {
-  border-color: #c4b4ff66;
-  background-color: #a685ff33;
-  color: #ddd6ff;
 }
 
 .tarjeta-formula-barra-progreso {
@@ -168,10 +121,6 @@
 
 .tarjeta-formula-icono-arrow-up-right {
   font-size: 1rem;
-}
-
-.pasos-formula-elemento-lista-etiqueta {
-  text-align: center;
 }
 
 .categoria-votacion-detalle-descripcion {
@@ -319,12 +268,6 @@
   gap: 0.5rem;
   flex-direction: column;
   display: flex;
-}
-
-.pasos-formula-lista-ordenada-progreso-de-la-formula {
-  gap: .25rem;
-  grid-template-columns: repeat(4,minmax(0,1fr));
-  display: grid;
 }
 
 .tarjeta-formula-tarjeta-layers-nivel-dificultad-nombre {

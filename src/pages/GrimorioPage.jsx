@@ -1,15 +1,13 @@
 import { useState } from "react";
-import { FiBookOpen, FiCalendar, FiSearch, FiStar } from "react-icons/fi";
+import { FiBookOpen, FiSearch, FiStar } from "react-icons/fi";
 import { GiPotionBall } from "react-icons/gi";
 import EncabezadoPagina from "../components/common/EncabezadoPagina";
 import EstadoVacio from "../components/common/EstadoVacio";
-import Modal from "../components/common/Modal";
 import { formatearFecha } from "../utils/formatters";
 
 function GrimorioPage({ grimorio, gremios }) {
   const [busqueda, setBusqueda] = useState("");
   const [gremioId, setGremioId] = useState("todos");
-  const [seleccionada, setSeleccionada] = useState(null);
 
   const pociones = grimorio.filter((pocion) => {
     const coincideTexto = `${pocion.nombre} ${pocion.efecto}`
@@ -55,7 +53,6 @@ function GrimorioPage({ grimorio, gremios }) {
                   <div><dt className="grimorio-nombre-dato-dificultad-real">Dificultad real</dt><dd className="grimorio-valor-dato-dificultad-real">{pocion.dificultadReal}</dd></div>
                   <div><dt className="grimorio-nombre-dato-destilacion">Destilación</dt><dd className="grimorio-valor-dato-fecha">{formatearFecha(pocion.fechaDestilacion)}</dd></div>
                 </dl>
-                <button className="grimorio-boton-consultar-ficha-completa" onClick={() => setSeleccionada(pocion)} type="button">Consultar ficha completa</button>
               </article>
             );
           })}
@@ -63,23 +60,6 @@ function GrimorioPage({ grimorio, gremios }) {
       ) : (
         <EstadoVacio descripcion="No hay resultados que coincidan con tu búsqueda actual." icono={FiBookOpen} titulo="El grimorio no encontró esa poción" />
       )}
-
-      <Modal abierto={Boolean(seleccionada)} descripcion="Registro permanente generado a partir de los votos ganadores." onCerrar={() => setSeleccionada(null)} titulo="Ficha de destilación">
-        {seleccionada && (
-          <div>
-            <div className="grimorio-contenedor-flexible-composicion-final-nombre">
-              <span className="grimorio-insignia-pocion-final"><GiPotionBall aria-hidden="true" /></span>
-              <div><p className="grimorio-descripcion-composicion-final">Composición final</p><h3 className="grimorio-titulo-tarjeta-nombre">{seleccionada.nombre}</h3></div>
-            </div>
-            <dl className="grimorio-lista-datos-rareza-rareza-dificultad-dificultad">
-              <div className="grimorio-panel-rareza-rareza"><dt className="grimorio-nombre-dato-rareza">Rareza</dt><dd className="grimorio-valor-dato-rareza">{seleccionada.rareza}</dd></div>
-              <div className="grimorio-panel-dificultad-dificultad-real"><dt className="grimorio-nombre-dato-dificultad">Dificultad</dt><dd className="grimorio-valor-dificultad-real">{seleccionada.dificultadReal}</dd></div>
-              <div className="grimorio-panel-fecha-calendar-fecha"><dt className="grimorio-nombre-dato-fecha">Fecha</dt><dd className="grimorio-valor-dato-calendar-fecha"><FiCalendar aria-hidden="true" /> {formatearFecha(seleccionada.fechaDestilacion)}</dd></div>
-            </dl>
-            <div className="grimorio-contenedor-efecto-documentado-efecto"><h4 className="grimorio-titulo-menor-efecto-documentado">Efecto documentado</h4><p className="grimorio-descripcion-efecto-documentado">{seleccionada.efecto}</p></div>
-          </div>
-        )}
-      </Modal>
     </div>
   );
 }

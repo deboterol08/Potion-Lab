@@ -1,9 +1,9 @@
 import { FiX } from "react-icons/fi";
 
 // Componente reutilizable para mostrar una ventana emergente con contenido personalizado.
-function Modal({ abierto, titulo, descripcion, onCerrar, children }) {
-  if (!abierto) return null;
 
+// Se usa cuando se va a crear un gremio, se va a ingresar el codigo para unirse a un gremio privado
+function Modal({ titulo, descripcion, onCerrar, children }) {
   return (
     <div
       className="modal-cuadricula-titulo-x-children"
@@ -16,9 +16,7 @@ function Modal({ abierto, titulo, descripcion, onCerrar, children }) {
           <div>
             <h2 className="modal-titulo-seccion">{titulo}</h2>
 
-            {descripcion && (
-              <p className="modal-descripcion">{descripcion}</p>
-            )}
+            <p className="modal-descripcion">{descripcion}</p>
           </div>
 
           <button

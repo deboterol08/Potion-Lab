@@ -9,7 +9,7 @@ function TarjetaFormula({ formula, gremio, creador, votosCompletados = 0 }) {
       <div className="tarjeta-formula-contenedor-flexible-layers-nivel-dificultad">
         <InsigniaEstado estado={formula.estado} />
         <span className="tarjeta-formula-texto-layers-nivel-dificultad">
-          <FiLayers aria-hidden="true" /> Nivel {formula.dificultad}
+          <FiLayers /> Nivel {formula.dificultad}
         </span>
       </div>
 
@@ -27,11 +27,11 @@ function TarjetaFormula({ formula, gremio, creador, votosCompletados = 0 }) {
 
       <div className="tarjeta-formula-cuadricula-user-calendar-tiempo-restante">
         <span className="tarjeta-formula-texto-user">
-          <FiUser aria-hidden="true" className="tarjeta-formula-icono-user" />
+          <FiUser className="tarjeta-formula-icono-user" />
           {creador?.nombreCompleto ?? "Alquimista desconocido"}
         </span>
         <span className="tarjeta-formula-texto-calendar-tiempo-restante">
-          <FiCalendar aria-hidden="true" className="tarjeta-formula-icono-calendar" />
+          <FiCalendar className="tarjeta-formula-icono-calendar" />
           {formula.estado === "voting"
             ? tiempoRestante(formula.fechaCierre)
             : formatearFecha(formula.fechaCierre)}
@@ -58,7 +58,7 @@ function TarjetaFormula({ formula, gremio, creador, votosCompletados = 0 }) {
         to={`/formulas/${formula.id}`}
       >
         {formula.estado === "voting" ? "Abrir mesa de votación" : "Ver expediente"}
-        <FiArrowUpRight aria-hidden="true" className="tarjeta-formula-icono-arrow-up-right" />
+        <FiArrowUpRight className="tarjeta-formula-icono-arrow-up-right" />
       </Link>
     </article>
   );

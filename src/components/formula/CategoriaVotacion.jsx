@@ -61,7 +61,7 @@ function CategoriaVotacion({
                     ? "categoria-votacion-insignia-seleccionada"
                     : "categoria-votacion-insignia-disponible"
                 }`}>
-                  {opcion.vetada ? <FiSlash aria-hidden="true" /> : opcion.sigla}
+                  {opcion.vetada ? <FiSlash /> : opcion.sigla}
                 </span>
                 <span className="categoria-votacion-texto-nombre-opcion-vetada">
                   <strong className="categoria-votacion-nombre-opcion">{opcion.nombre}</strong>
@@ -69,7 +69,7 @@ function CategoriaVotacion({
                     {opcion.vetada ? (
                       "Opción vetada"
                     ) : seleccionada ? (
-                      <><FiCheck aria-hidden="true" /> Tu elección</>
+                      <><FiCheck /> Tu elección</>
                     ) : puedeVotar ? (
                       "Elegir opción"
                     ) : (
@@ -109,7 +109,7 @@ function CategoriaVotacion({
                   onClick={() => onVeto(categoria.id, opcion.id)}
                   type="button"
                 >
-                  <FiShield aria-hidden="true" /> Aplicar veto de Catador
+                  <FiShield /> Aplicar veto de Catador
                 </button>
               )}
             </article>

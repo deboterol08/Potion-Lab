@@ -36,8 +36,8 @@ function ListaMiembros({ gremio, usuarios, puedeAdministrar, onChangeRole, onApp
                 <td className="lista-miembros-celda-fecha">{formatearFecha(miembro.fechaIngreso)}</td>
                 <td className="lista-miembros-celda-rol">
                   <span className="lista-miembros-texto-rol">
-                    {miembro.rol === "Gran Maestre" && <FiStar aria-hidden="true" className="lista-miembros-icono-star" />}
-                    {miembro.rol === "Catador oficial" && <FiShield aria-hidden="true" className="lista-miembros-icono-shield" />}
+                    {miembro.rol === "Gran Maestre" && <FiStar className="lista-miembros-icono-star" />}
+                    {miembro.rol === "Catador oficial" && <FiShield className="lista-miembros-icono-shield" />}
                     {miembro.rol}
                   </span>
                 </td>
@@ -55,7 +55,7 @@ function ListaMiembros({ gremio, usuarios, puedeAdministrar, onChangeRole, onApp
                             <option>Aprendiz</option>
                             <option>Alquimista sénior</option>
                           </select>
-                          <FiChevronDown className="lista-miembros-icono-chevron-down" aria-hidden="true" />
+                          <FiChevronDown className="lista-miembros-icono-chevron-down" />
                         </label>
                         {miembro.rol !== "Catador oficial" && (
                           <button

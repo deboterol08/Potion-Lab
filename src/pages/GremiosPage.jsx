@@ -126,105 +126,107 @@ function GremiosPage({ usuario, gremios, onCreateGuild, onJoinGuild }) {
         />
       )}
 
-      <Modal
-        abierto={modalCrear}
-        descripcion="Serás Gran Maestre y podrás administrar roles y fórmulas."
-        onCerrar={() => {
-          setModalCrear(false);
-          setError("");
-        }}
-        titulo="Fundar un gremio"
-      >
-        <form className="gremios-formulario-nombre-del-gremio-lema" onSubmit={manejarCrear}>
-          <label className="gremios-etiqueta-campo-nombre-del-gremio">
-            <span className="gremios-texto-nombre-del-gremio">Nombre del gremio</span>
-            <input
-              className="gremios-campo"
-              maxLength="50"
-              onChange={(evento) => setFormulario((anterior) => ({ ...anterior, nombre: evento.target.value }))}
-              required
-              value={formulario.nombre}
-            />
-          </label>
-          <label className="gremios-etiqueta-campo-lema">
-            <span className="gremios-texto-lema">Lema</span>
-            <input
-              className="gremios-campo-lema"
-              maxLength="90"
-              onChange={(evento) => setFormulario((anterior) => ({ ...anterior, lema: evento.target.value }))}
-              required
-              value={formulario.lema}
-            />
-          </label>
-          <label className="gremios-etiqueta-campo-descripcion">
-            <span className="gremios-texto-descripcion">Descripción</span>
-            <textarea
-              className="gremios-area-texto"
-              maxLength="180"
-              onChange={(evento) => setFormulario((anterior) => ({ ...anterior, descripcion: evento.target.value }))}
-              required
-              value={formulario.descripcion}
-            />
-          </label>
-          <div className="gremios-cuadricula-visibilidad-publico-privado-url">
-            <label className="gremios-etiqueta-campo-visibilidad-publico-privado">
-              <span className="gremios-texto-visibilidad">Visibilidad</span>
-              <select
-                className="gremios-selector-publico-privado"
-                onChange={(evento) => setFormulario((anterior) => ({ ...anterior, tipo: evento.target.value }))}
-                value={formulario.tipo}
-              >
-                <option value="publico">Público</option>
-                <option value="privado">Privado</option>
-              </select>
-            </label>
-            <label className="gremios-etiqueta-campo-url-del-emblema">
-              <span className="gremios-texto-url-del-emblema">URL del emblema</span>
+      {modalCrear && (
+        <Modal
+          descripcion="Serás Gran Maestre y podrás administrar roles y fórmulas."
+          onCerrar={() => {
+            setModalCrear(false);
+            setError("");
+          }}
+          titulo="Fundar un gremio"
+        >
+          <form className="gremios-formulario-nombre-del-gremio-lema" onSubmit={manejarCrear}>
+            <label className="gremios-etiqueta-campo-nombre-del-gremio">
+              <span className="gremios-texto-nombre-del-gremio">Nombre del gremio</span>
               <input
-                className="gremios-campo-opcional"
-                onChange={(evento) => setFormulario((anterior) => ({ ...anterior, emblemaUrl: evento.target.value }))}
-                placeholder="Opcional"
-                type="url"
-                value={formulario.emblemaUrl}
+                className="gremios-campo"
+                maxLength="50"
+                onChange={(evento) => setFormulario((anterior) => ({ ...anterior, nombre: evento.target.value }))}
+                required
+                value={formulario.nombre}
               />
             </label>
-          </div>
-          {error && <p className="gremios-descripcion-error" role="alert">{error}</p>}
-          <button className="gremios-boton-crear-gremio" type="submit">
-            Crear gremio
-          </button>
-        </form>
-      </Modal>
+            <label className="gremios-etiqueta-campo-lema">
+              <span className="gremios-texto-lema">Lema</span>
+              <input
+                className="gremios-campo-lema"
+                maxLength="90"
+                onChange={(evento) => setFormulario((anterior) => ({ ...anterior, lema: evento.target.value }))}
+                required
+                value={formulario.lema}
+              />
+            </label>
+            <label className="gremios-etiqueta-campo-descripcion">
+              <span className="gremios-texto-descripcion">Descripción</span>
+              <textarea
+                className="gremios-area-texto"
+                maxLength="180"
+                onChange={(evento) => setFormulario((anterior) => ({ ...anterior, descripcion: evento.target.value }))}
+                required
+                value={formulario.descripcion}
+              />
+            </label>
+            <div className="gremios-cuadricula-visibilidad-publico-privado-url">
+              <label className="gremios-etiqueta-campo-visibilidad-publico-privado">
+                <span className="gremios-texto-visibilidad">Visibilidad</span>
+                <select
+                  className="gremios-selector-publico-privado"
+                  onChange={(evento) => setFormulario((anterior) => ({ ...anterior, tipo: evento.target.value }))}
+                  value={formulario.tipo}
+                >
+                  <option value="publico">Público</option>
+                  <option value="privado">Privado</option>
+                </select>
+              </label>
+              <label className="gremios-etiqueta-campo-url-del-emblema">
+                <span className="gremios-texto-url-del-emblema">URL del emblema</span>
+                <input
+                  className="gremios-campo-opcional"
+                  onChange={(evento) => setFormulario((anterior) => ({ ...anterior, emblemaUrl: evento.target.value }))}
+                  placeholder="Opcional"
+                  type="url"
+                  value={formulario.emblemaUrl}
+                />
+              </label>
+            </div>
+            {error && <p className="gremios-descripcion-error" role="alert">{error}</p>}
+            <button className="gremios-boton-crear-gremio" type="submit">
+              Crear gremio
+            </button>
+          </form>
+        </Modal>
+      )}
 
-      <Modal
-        abierto={Boolean(gremioParaUnirse)}
-        descripcion={`Solicita el código de 6 caracteres de ${gremioParaUnirse?.nombre ?? "este gremio"}.`}
-        onCerrar={() => setGremioParaUnirse(null)}
-        titulo="Unirse a gremio privado"
-      >
-        <form className="gremios-formulario-lock-codigo-de-invitacion" onSubmit={manejarUnion}>
-          <label className="gremios-etiqueta-campo-lock-codigo-de-invitacion">
-            <span className="gremios-texto-lock-codigo-de-invitacion">
-              <FiLock aria-hidden="true" /> Código de invitación
-            </span>
-            <input
-              autoFocus
-              className="gremios-campo-codigo-invitacion"
-              maxLength="6"
-              onChange={(evento) => {
-                setCodigo(evento.target.value.toUpperCase());
-                setError("");
-              }}
-              required
-              value={codigo}
-            />
-          </label>
-          {error && <p className="gremios-error-union" role="alert">{error}</p>}
-          <button className="gremios-boton-validar-y-unirme" type="submit">
-            Validar y unirme
-          </button>
-        </form>
-      </Modal>
+      {gremioParaUnirse && (
+        <Modal
+          descripcion={`Solicita el código de 6 caracteres de ${gremioParaUnirse.nombre}.`}
+          onCerrar={() => setGremioParaUnirse(null)}
+          titulo="Unirse a gremio privado"
+        >
+          <form className="gremios-formulario-lock-codigo-de-invitacion" onSubmit={manejarUnion}>
+            <label className="gremios-etiqueta-campo-lock-codigo-de-invitacion">
+              <span className="gremios-texto-lock-codigo-de-invitacion">
+                <FiLock aria-hidden="true" /> Código de invitación
+              </span>
+              <input
+                autoFocus
+                className="gremios-campo-codigo-invitacion"
+                maxLength="6"
+                onChange={(evento) => {
+                  setCodigo(evento.target.value.toUpperCase());
+                  setError("");
+                }}
+                required
+                value={codigo}
+              />
+            </label>
+            {error && <p className="gremios-error-union" role="alert">{error}</p>}
+            <button className="gremios-boton-validar-y-unirme" type="submit">
+              Validar y unirme
+            </button>
+          </form>
+        </Modal>
+      )}
     </div>
   );
 }

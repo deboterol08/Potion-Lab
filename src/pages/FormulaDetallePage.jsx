@@ -14,7 +14,6 @@ import {
 import { GiPotionBall } from "react-icons/gi";
 import InsigniaEstado from "../components/common/InsigniaEstado";
 import CategoriaVotacion from "../components/formula/CategoriaVotacion";
-import PasosEstadoFormula from "../components/formula/PasosEstadoFormula";
 import { formatearFecha, tiempoRestante } from "../utils/formatters";
 import { esCatadorOficial, obtenerRol } from "../utils/roles";
 import { obtenerPesoVoto } from "../utils/voting";
@@ -113,10 +112,6 @@ function FormulaDetallePage({
               <div><dt className="formula-detalle-nombre-dato-disponibilidad">Disponibilidad</dt><dd className="formula-detalle-valor-dato-tiempo-restante">{formula.estado === "voting" ? tiempoRestante(formula.fechaCierre) : "Etapa completada"}</dd></div>
             </div>
           </dl>
-        </div>
-
-        <div className="formula-detalle-panel">
-          <PasosEstadoFormula estado={formula.estado} />
         </div>
       </section>
 

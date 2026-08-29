@@ -16,10 +16,10 @@ function TarjetaGremio({ gremio, usuarioId, onJoin }) {
             className="tarjeta-gremio-insignia"
             style={{ backgroundColor: `${gremio.acento}18`, color: gremio.acento }}
           >
-            <GiHerbsBundle aria-hidden="true" />
+            <GiHerbsBundle />
           </span>
           <span className="tarjeta-gremio-texto-publico">
-            {gremio.tipo === "privado" && <FiLock aria-hidden="true" />}
+            {gremio.tipo === "privado" && <FiLock />}
             {gremio.tipo === "publico" ? "Público" : "Privado"}
           </span>
         </div>
@@ -34,7 +34,7 @@ function TarjetaGremio({ gremio, usuarioId, onJoin }) {
 
         <div className="tarjeta-gremio-contenedor-flexible-users-length-miembros">
           <span className="tarjeta-gremio-texto-users-length-miembros">
-            <FiUsers aria-hidden="true" /> {gremio.miembros.length} miembros
+            <FiUsers /> {gremio.miembros.length} miembros
           </span>
           {pertenece && <span className="tarjeta-gremio-texto-rol">{rol}</span>}
         </div>
@@ -44,7 +44,7 @@ function TarjetaGremio({ gremio, usuarioId, onJoin }) {
             className="tarjeta-gremio-enlace-gremios"
             to={`/gremios/${gremio.id}`}
           >
-            Entrar al gremio <FiArrowRight aria-hidden="true" />
+            Entrar al gremio <FiArrowRight />
           </Link>
         ) : (
           <button

@@ -14,7 +14,6 @@ function LayoutPrincipal({ onLogout }) {
           <Outlet />
         </main>
       </div>
-      <NavegacionMovil />
     </div>
   );
 }

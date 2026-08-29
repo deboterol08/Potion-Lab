@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { FiBell, FiChevronDown, FiLogOut } from "react-icons/fi";
+import { FiLogOut } from "react-icons/fi";
 import { GiPotionBall } from "react-icons/gi";
 import UsuarioContext from "../../context/UsuarioContext";
 import { obtenerIniciales } from "../../utils/formatters";
@@ -12,7 +12,7 @@ function BarraSuperior({ onLogout }) {
       <div className="barra-superior-contenedor-flexible-potion-lab-laboratorio-conectado">
         <Link className="barra-superior-enlace-potion-lab" to="/">
           <span className="barra-superior-insignia">
-            <GiPotionBall aria-hidden="true" />
+            <GiPotionBall />
           </span>
           <strong className="barra-superior-dato-destacado-potion-lab">Potion Lab</strong>
         </Link>
@@ -28,15 +28,6 @@ function BarraSuperior({ onLogout }) {
         </div>
 
         <div className="barra-superior-contenedor-flexible-bell-nombre-completo-especialidad">
-          <button
-            aria-label="Notificaciones"
-            className="barra-superior-boton-notificaciones"
-            type="button"
-          >
-            <FiBell aria-hidden="true" />
-            <span className="barra-superior-indicador-notificacion" />
-          </button>
-
           <Link
             className="barra-superior-enlace-perfil"
             to="/perfil"
@@ -58,7 +49,6 @@ function BarraSuperior({ onLogout }) {
               </strong>
               <small className="barra-superior-detalle-especialidad">{usuario.especialidad}</small>
             </span>
-            <FiChevronDown aria-hidden="true" className="barra-superior-icono-chevron-down" />
           </Link>
 
           <button
@@ -68,7 +58,7 @@ function BarraSuperior({ onLogout }) {
             title="Cerrar sesión"
             type="button"
           >
-            <FiLogOut aria-hidden="true" />
+            <FiLogOut />
           </button>
         </div>
       </div>

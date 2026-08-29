@@ -15,7 +15,7 @@ function BarraLateral() {
     <aside className="barra-lateral-panel-lateral-potion-lab-academia-arcana">
       <div className="barra-lateral-contenedor-flexible-potion-lab-academia-arcana">
         <span className="barra-lateral-insignia">
-          <GiPotionBall aria-hidden="true" />
+          <GiPotionBall />
         </span>
         <span>
           <strong className="barra-lateral-dato-destacado-potion-lab">
@@ -44,7 +44,7 @@ function BarraLateral() {
             key={to}
             to={to}
           >
-            <Icono aria-hidden="true" className="barra-lateral-icono-decorativo" />
+            <Icono className="barra-lateral-icono-decorativo" />
             {etiqueta}
           </NavLink>
         ))}
@@ -54,7 +54,7 @@ function BarraLateral() {
         <section className="barra-lateral-seccion-progreso-del-alquimista" aria-label="Progreso del alquimista">
           <div className="barra-lateral-contenedor-flexible-zap-nivel-nivel-progreso">
             <span className="barra-lateral-texto-zap-nivel-nivel">
-              <FiZap className="barra-lateral-icono-zap" aria-hidden="true" /> Nivel {nivel}
+              <FiZap className="barra-lateral-icono-zap" /> Nivel {nivel}
             </span>
             <small className="barra-lateral-detalle-progreso-nivel-100-px">{progresoNivel}/100 PX</small>
           </div>
