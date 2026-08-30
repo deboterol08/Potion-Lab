@@ -1,3 +1,4 @@
+// Importamos hooks de React, componentes visuales e íconos necesarios
 import { useState } from "react";
 import { FiLock, FiPlus, FiSearch, FiUsers } from "react-icons/fi";
 import EncabezadoPagina from "../components/common/EncabezadoPagina";
@@ -5,6 +6,7 @@ import EstadoVacio from "../components/common/EstadoVacio";
 import Modal from "../components/common/Modal";
 import TarjetaGremio from "../components/gremio/TarjetaGremio";
 
+// formulario de creación de gremios
 const formularioInicial = {
   nombre: "",
   lema: "",
@@ -14,6 +16,7 @@ const formularioInicial = {
 };
 
 function GremiosPage({ usuario, gremios, onCreateGuild, onJoinGuild }) {
+  // Estados para búsqueda por texto, filtro de membresía y modales/formularios
   const [busqueda, setBusqueda] = useState("");
   const [soloMios, setSoloMios] = useState(false);
   const [modalCrear, setModalCrear] = useState(false);
@@ -22,6 +25,7 @@ function GremiosPage({ usuario, gremios, onCreateGuild, onJoinGuild }) {
   const [error, setError] = useState("");
   const [formulario, setFormulario] = useState(formularioInicial);
 
+  // Filtra gremios por coincidencia en nombre/lema y por membresía 
   const gremiosFiltrados = gremios.filter((gremio) => {
     const coincideTexto = `${gremio.nombre} ${gremio.lema}`
       .toLowerCase()
@@ -32,6 +36,7 @@ function GremiosPage({ usuario, gremios, onCreateGuild, onJoinGuild }) {
     return coincideTexto && (!soloMios || pertenece);
   });
 
+  // para la creación de un nuevo gremio con manejo de errores
   function manejarCrear(evento) {
     evento.preventDefault();
     const resultado = onCreateGuild(formulario);
@@ -44,6 +49,7 @@ function GremiosPage({ usuario, gremios, onCreateGuild, onJoinGuild }) {
     setModalCrear(false);
   }
 
+  // directa si es público o abre modal para código si es privado
   function abrirUnion(gremio) {
     if (gremio.tipo === "publico") {
       onJoinGuild(gremio.id, "");
@@ -54,6 +60,7 @@ function GremiosPage({ usuario, gremios, onCreateGuild, onJoinGuild }) {
     setError("");
   }
 
+  // para validar el código de acceso e ingresar a un gremio privado
   function manejarUnion(evento) {
     evento.preventDefault();
     const resultado = onJoinGuild(gremioParaUnirse.id, codigo);
@@ -67,6 +74,7 @@ function GremiosPage({ usuario, gremios, onCreateGuild, onJoinGuild }) {
 
   return (
     <div className="gremios-lista-vertical-buscar-gremios-search-mostrar">
+      {/* Encabezado con título de la sección y botón para abrir el modal de creación */}
       <EncabezadoPagina
         acciones={
           <button
@@ -82,6 +90,7 @@ function GremiosPage({ usuario, gremios, onCreateGuild, onJoinGuild }) {
         titulo="Gremios"
       />
 
+      {/* Búsqueda textual y conmutador para mostrar solo gremios propios */}
       <section className="gremios-seccion-buscar-gremios-search-mostrar">
         <label className="gremios-etiqueta-campo-buscar-gremios-search">
           <span className="gremios-texto-buscar-gremios">Buscar gremios</span>
@@ -107,6 +116,7 @@ function GremiosPage({ usuario, gremios, onCreateGuild, onJoinGuild }) {
         </button>
       </section>
 
+      {/* Muestra la grilla de gremios o el estado vacío */}
       {gremiosFiltrados.length > 0 ? (
         <section className="gremios-cuadricula-map">
           {gremiosFiltrados.map((gremio) => (
@@ -126,6 +136,7 @@ function GremiosPage({ usuario, gremios, onCreateGuild, onJoinGuild }) {
         />
       )}
 
+      {/* formulario para registrar y fundar un nuevo gremio */}
       <Modal
         abierto={modalCrear}
         descripcion="Serás Gran Maestre y podrás administrar roles y fórmulas."
@@ -196,6 +207,7 @@ function GremiosPage({ usuario, gremios, onCreateGuild, onJoinGuild }) {
         </form>
       </Modal>
 
+      {/*  para ingresar el código de invitación e unirse a un gremio privado */}
       <Modal
         abierto={Boolean(gremioParaUnirse)}
         descripcion={`Solicita el código de 6 caracteres de ${gremioParaUnirse?.nombre ?? "este gremio"}.`}
